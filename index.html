@@ -3,83 +3,92 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="TerraRosa International provides strategic business consulting and operational simplicity.">
+  <meta name="description" content="TerraRosa International: Kurumsal sadeleşme, ticaret danışmanlığı ve stratejik yönlendirme hizmetleri.">
   <title>TerraRosa International</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
   <style>
-    .lang { display: none; }
-    .lang.active { display: block; }
-    .lang-toggle { cursor: pointer; margin: 10px; }
+    body {
+      background-color: #f9f9f9;
+    }
+    .logo-text {
+      font-weight: 700;
+      font-size: 1.2rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    header {
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: white;
+      border-bottom: 1px solid #ddd;
+    }
+    .section {
+      padding: 4rem 1rem;
+    }
+    .section-dark {
+      background-color: #1a1a1a;
+      color: white;
+    }
+    .footer {
+      padding: 2rem 1rem;
+      font-size: 0.9rem;
+      text-align: center;
+      background-color: #f1f1f1;
+      color: #555;
+    }
   </style>
 </head>
 <body>
 
-  <div class="container text-center py-5">
-    <!-- Dil Seçici -->
-    <div class="mb-4">
-      <span class="lang-toggle fw-bold" onclick="toggleLang('tr')">Türkçe</span> | 
-      <span class="lang-toggle fw-bold" onclick="toggleLang('en')">English</span>
-    </div>
+  <!-- Header with logo -->
+  <header>
+    <div class="logo-text">TerraRosa</div>
+    <!-- Logo resmi eklemek istersen şunu kullan:
+    <img src="logo.png" alt="TerraRosa Logo" height="40"> -->
+    <nav>
+      <a href="#contact" class="text-decoration-none text-dark">İletişim</a>
+    </nav>
+  </header>
 
-    <!-- Türkçe -->
-    <div id="lang-tr" class="lang active">
-      <h1 class="text-uppercase fw-bold mb-3">ANLAYANLA ÇALIŞIRIZ</h1>
-      <p class="lead">Gürültüyü ayıklarız. Kalanla iş bitiririz.</p>
+  <!-- Hero Section -->
+  <div class="section text-center">
+    <h1 class="text-uppercase fw-bold">Anlayanla Çalışırız</h1>
+    <p class="lead">Gürültüyü ayıklarız, sade kalanla iş bitiririz.</p>
+  </div>
 
-      <div class="row mt-5">
-        <div class="col-md-4 mb-4">
-          <h5 class="text-uppercase">Kurumsal Sadeleşme</h5>
+  <!-- Services Section -->
+  <div class="section section-dark text-center">
+    <div class="container">
+      <div class="row g-4">
+        <div class="col-md-4">
+          <h4 class="text-uppercase">Kurumsal Sadeleşme</h4>
           <p>İç süreçlerde yalın yapı kurarız. Az kişiyle daha çok sonuç.</p>
         </div>
-        <div class="col-md-4 mb-4">
-          <h5 class="text-uppercase">Ticaret Danışmanlığı</h5>
+        <div class="col-md-4">
+          <h4 class="text-uppercase">Ticaret Danışmanlığı</h4>
           <p>İthalat, ihracat ve iç pazarda doğrudan model kurarız.</p>
         </div>
-        <div class="col-md-4 mb-4">
-          <h5 class="text-uppercase">Stratejik Rehberlik</h5>
+        <div class="col-md-4">
+          <h4 class="text-uppercase">Stratejik Rehberlik</h4>
           <p>Gereksiz stratejileri eleriz. Geriye kalan çalışır.</p>
         </div>
       </div>
-
-      <hr class="my-5" />
-      <h2 class="mb-3">İLETİŞİM</h2>
-      <p class="lead"><a href="mailto:satis@terrarosainternational.com">satis@terrarosainternational.com</a></p>
     </div>
-
-    <!-- English -->
-    <div id="lang-en" class="lang">
-      <h1 class="text-uppercase fw-bold mb-3">WE WORK WITH THOSE WHO UNDERSTAND</h1>
-      <p class="lead">We remove the noise. What's left gets the job done.</p>
-
-      <div class="row mt-5">
-        <div class="col-md-4 mb-4">
-          <h5 class="text-uppercase">Operational Simplicity</h5>
-          <p>We streamline internal processes. Fewer people, more results.</p>
-        </div>
-        <div class="col-md-4 mb-4">
-          <h5 class="text-uppercase">Trade Advisory</h5>
-          <p>We build direct models in import, export, and domestic markets.</p>
-        </div>
-        <div class="col-md-4 mb-4">
-          <h5 class="text-uppercase">Strategic Guidance</h5>
-          <p>We eliminate unnecessary strategies. The rest performs.</p>
-        </div>
-      </div>
-
-      <hr class="my-5" />
-      <h2 class="mb-3">CONTACT</h2>
-      <p class="lead"><a href="mailto:satis@terrarosainternational.com">satis@terrarosainternational.com</a></p>
-    </div>
-
   </div>
 
-  <!-- JS: Dil Değiştirici -->
-  <script>
-    function toggleLang(lang) {
-      document.querySelectorAll('.lang').forEach(el => el.classList.remove('active'));
-      document.getElementById('lang-' + lang).classList.add('active');
-    }
-  </script>
+  <!-- Contact Section -->
+  <div class="section text-center" id="contact">
+    <h2 class="text-uppercase">İletişim</h2>
+    <p class="lead"><a href="mailto:satis@terrarosainternational.com">satis@terrarosainternational.com</a></p>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    &copy; 2025 TerraRosa International. Tüm hakları saklıdır.
+  </div>
 
 </body>
 </html>
+
