@@ -56,30 +56,29 @@
     }
 
     header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 1rem 2rem;
-      border-bottom: 1px solid #ddd;
-      background-color: #fefefe;
       text-align: center;
       padding: 2rem 1rem 1rem;
+      border-bottom: 1px solid #ddd;
+      background-color: #fefefe;
     }
-   
 
-    .logo img {
-      width: 30%;
-      max-width: 400px;
+    .main-logo {
+      width: 20%;
+      max-width: 240px;
       height: auto;
+      display: block;
+      margin: 0 auto 1rem;
     }
+
     nav {
       margin-top: 1rem;
     }
 
     nav a {
-      margin-left: 1rem;
+      margin: 0 1rem;
       text-decoration: none;
       color: #0077cc;
+      font-weight: bold;
     }
 
     main {
@@ -122,19 +121,22 @@
         display: block;
         margin: 0.5rem 0;
       }
+
+      .main-logo {
+        width: 50%;
+      }
     }
   </style>
 </head>
 <body>
 
   <header>
-  <img src="logo.png" alt="TerraRosa Logo" class="main-logo">
-  <nav>
-    <a href="#contact">Contact</a>
-    <a href="en.html">Türkçe</a>
-  </nav>
-</header>
-
+    <img src="logo.png" alt="TerraRosa Logo" class="main-logo">
+    <nav>
+      <a href="#contact">Contact</a>
+      <a href="index.html">Türkçe</a>
+    </nav>
+  </header>
 
   <main>
     <section>
@@ -175,10 +177,3 @@
 </body>
 </html>
 
-
-  <footer>
-    &copy; 2025 TerraRosa International. All rights reserved.
-  </footer>
-
-</body>
-</html>
