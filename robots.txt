@@ -1,0 +1,6 @@
+User-agent: *
+Disallow:
+
+Allow: /
+
+Sitemap: https://www.terrarosainternational.com/sitemap.xml
