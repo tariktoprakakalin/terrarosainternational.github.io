@@ -1,11 +1,11 @@
-/* ====== GLOBAL ====== */
+/* ====== GLOBAL LAYOUT ====== */
 
 body {
   margin: 0;
   font-family: system-ui, -apple-system, sans-serif;
-  background: #0d0d0d;   /* graphit black */
-  color: #e6e6e6;        /* soft white */
   line-height: 1.6;
+  background: #0d0d0d;   /* default: dark */
+  color: #e6e6e6;
 }
 
 a {
@@ -22,14 +22,125 @@ a:hover {
   margin: auto;
 }
 
+/* ====== THEME VARSLARI ====== */
+
+/* AÇIK TEMA */
+body.theme-light {
+  background: #ffffff;
+  color: #111111;
+}
+
+body.theme-light .tr-header {
+  background: #ffffff;
+  border-bottom: 1px solid #eeeeee;
+}
+
+body.theme-light .tr-menu a {
+  color: #111111;
+}
+
+body.theme-light .tr-hero {
+  background: #f8f8f8;
+  color: #111111;
+}
+
+body.theme-light .tr-hero-note {
+  color: #555555;
+}
+
+body.theme-light .tr-section {
+  background: #ffffff;
+}
+
+body.theme-light .tr-section-alt {
+  background: #fafafa;
+}
+
+body.theme-light .tr-card {
+  background: #ffffff;
+  border: 1px solid #e0e0e0;
+}
+
+body.theme-light .tr-form input,
+body.theme-light .tr-form textarea {
+  background: #ffffff;
+  color: #111111;
+  border: 1px solid #cccccc;
+}
+
+body.theme-light .tr-footer {
+  background: #fafafa;
+  border-top: 1px solid #eeeeee;
+  color: #777777;
+}
+
+/* KOYU TEMA */
+body.theme-dark,
+body:not(.theme-light) { /* js çalışmazsa default dark */
+  background: #0d0d0d;
+  color: #e6e6e6;
+}
+
+body.theme-dark .tr-header,
+body:not(.theme-light) .tr-header {
+  background: #0d0d0d;
+  border-bottom: 1px solid #222222;
+}
+
+body.theme-dark .tr-menu a,
+body:not(.theme-light) .tr-menu a {
+  color: #dcdcdc;
+}
+
+body.theme-dark .tr-hero,
+body:not(.theme-light) .tr-hero {
+  background: #111111;
+  color: #e6e6e6;
+}
+
+body.theme-dark .tr-hero-note,
+body:not(.theme-light) .tr-hero-note {
+  color: #aaaaaa;
+}
+
+body.theme-dark .tr-section,
+body:not(.theme-light) .tr-section {
+  background: #0d0d0d;
+}
+
+body.theme-dark .tr-section-alt,
+body:not(.theme-light) .tr-section-alt {
+  background: #141414;
+}
+
+body.theme-dark .tr-card,
+body:not(.theme-light) .tr-card {
+  background: #1b1b1b;
+  border: 1px solid #2e2e2e;
+}
+
+body.theme-dark .tr-form input,
+body.theme-dark .tr-form textarea,
+body:not(.theme-light) .tr-form input,
+body:not(.theme-light) .tr-form textarea {
+  background: #111111;
+  color: #e6e6e6;
+  border: 1px solid #444444;
+}
+
+body.theme-dark .tr-footer,
+body:not(.theme-light) .tr-footer {
+  background: #0d0d0d;
+  border-top: 1px solid #222222;
+  color: #777777;
+}
+
 /* ====== HEADER & LOGO ====== */
 
 .tr-header {
   text-align: center;
   padding-top: 1.5rem;
   padding-bottom: 0.5rem;
-  border-bottom: 1px solid #222;
-  background: #0d0d0d;
 }
 
 .tr-nav {
@@ -60,16 +171,36 @@ a:hover {
   gap: 1rem;
 }
 
-.tr-menu a {
-  font-weight: 500;
-  color: #dcdcdc;
+.tr-lang {
+  font-weight: 600;
+}
+
+/* Tema butonu */
+.tr-theme-toggle {
+  border: 1px solid #444444;
+  border-radius: 999px;
+  padding: 0.25rem 0.75rem;
+  font-size: 0.85rem;
+  background: transparent;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+body.theme-light .tr-theme-toggle {
+  border-color: #cccccc;
+  color: #333333;
+}
+body.theme-dark .tr-theme-toggle,
+body:not(.theme-light) .tr-theme-toggle {
+  border-color: #555555;
+  color: #dddddd;
 }
 
 /* ====== HERO ====== */
 
 .tr-hero {
   padding: 3rem 0 2rem;
-  background: #111; /* daha koyu hero bölümü */
 }
 
 .tr-hero-text {
@@ -81,15 +212,6 @@ a:hover {
 .tr-hero h1 {
   font-size: 2rem;
   margin-bottom: 1rem;
-  color: #ffffff;
-}
-
-.tr-hero p {
-  color: #cccccc;
-}
-
-.tr-hero strong {
-  color: #ffffff;
 }
 
 .tr-btn {
@@ -97,6 +219,7 @@ a:hover {
   border-radius: 6px;
   font-weight: 600;
   display: inline-block;
+  border: none;
 }
 
 .tr-btn.primary {
@@ -105,8 +228,8 @@ a:hover {
 }
 
 .tr-btn.ghost {
-  border: 1px solid #ffffff;
-  color: #ffffff;
+  border: 1px solid currentColor;
+  background: transparent;
 }
 
 .tr-hero-actions {
@@ -118,27 +241,19 @@ a:hover {
 
 .tr-hero-note {
   font-size: 0.85rem;
-  opacity: 0.7;
 }
 
-/* ====== SECTIONS ====== */
+/* ====== SECTIONS & GRID ====== */
 
 .tr-section {
   padding: 3rem 0;
-  color: #e6e6e6;
-}
-
-.tr-section-alt {
-  background: #141414;
 }
 
 .tr-lead {
   font-size: 1.1rem;
-  opacity: 0.85;
+  opacity: 0.9;
   margin-bottom: 2rem;
 }
-
-/* ====== GRID ====== */
 
 .tr-grid-3 {
   display: grid;
@@ -152,18 +267,31 @@ a:hover {
   gap: 2.5rem;
 }
 
-/* Kart tasarımı */
+/* Kartlar */
 .tr-card {
   padding: 1.5rem;
-  background: #1b1b1b;
   border-radius: 8px;
-  border: 1px solid #2e2e2e;
+}
+
+/* Süreç listesi */
+.tr-step-list {
+  list-style: decimal;
+  padding-left: 1.2rem;
+}
+.tr-step-list li {
+  margin-bottom: 1rem;
 }
 
 /* ====== FORM ====== */
 
+.tr-form .tr-field {
+  margin-bottom: 1rem;
+}
+
 .tr-form label {
+  display: block;
   font-weight: 600;
+  margin-bottom: 0.3rem;
 }
 
 .tr-form input,
@@ -171,9 +299,8 @@ a:hover {
   width: 100%;
   padding: 0.6rem;
   border-radius: 6px;
-  border: 1px solid #444;
-  background: #111;
-  color: #e6e6e6;
+  font-size: 1rem;
+  font-family: inherit;
 }
 
 .tr-btn.full {
@@ -188,13 +315,11 @@ a:hover {
   margin-top: 4rem;
   padding: 2rem 0;
   text-align: center;
-  background: #0d0d0d;
-  color: #777;
   font-size: 0.9rem;
-  border-top: 1px solid #222;
 }
 
 /* ====== MOBILE ====== */
+
 @media (max-width: 600px) {
   .tr-logo img {
     max-width: 260px;
@@ -211,12 +336,6 @@ a:hover {
   .tr-hero h1 {
     font-size: 1.45rem;
   }
-
-  .tr-hero-actions {
-    flex-direction: column;
-  }
-}
-
 
   .tr-hero-actions {
     flex-direction: column;
