@@ -227,8 +227,7 @@
         </p>
 
         <div class="tr-grid-2">
-          <form class="tr-form" method="POST" action="YOUR_FORM_ENDPOINT_HERE">
-            <!-- Buraya Formspree / Netlify / kendi endpoint’in gelecek -->
+          <form class="tr-form">
             <div class="tr-field">
               <label for="company">Şirket adı</label>
               <input type="text" id="company" name="company" required />
@@ -237,6 +236,11 @@
             <div class="tr-field">
               <label for="country">Ülke</label>
               <input type="text" id="country" name="country" required />
+            </div>
+
+            <div class="tr-field">
+              <label for="email">Kurumsal e-posta</label>
+              <input type="email" id="email" name="email" required placeholder="name@company.com" />
             </div>
 
             <div class="tr-field">
@@ -271,7 +275,7 @@
             <h3>Doğrudan iletişim</h3>
             <p>
               Genel sorular için:<br/>
-              <a href="mailto:info@terrarosainternational.com">info@terrarosainternational.com</a>
+              <a href="mailto:satis@terrarosainternational.com">satis@terrarosainternational.com</a>
             </p>
             <p>
               Lütfen spam niteliğinde toplu teklif veya gerçekçi olmayan prosedürler göndermeyin.
@@ -291,5 +295,101 @@
       document.getElementById("year").textContent = new Date().getFullYear();
     </script>
   </footer>
+
+  <!-- Form JS: Google Sheets entegrasyonu + kurumsal e-posta kontrolü -->
+  <script>
+    // Google Apps Script Web App URL - senin çalışan endpoint'in
+    const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyiG3S1XCYsZkFEILnxgFqAF12ABUEBfvTH0VxngPFoFq3J9latmScC6WbpJEoqbJ5d/exec';
+
+    // Kurumsal email kontrolü - free mail domainlerini engelle
+    const blockedEmailDomains = [
+      'gmail.com', 'gmail.com.tr',
+      'yahoo.com', 'yahoo.com.tr',
+      'hotmail.com', 'hotmail.com.tr',
+      'outlook.com', 'outlook.com.tr',
+      'live.com', 'live.com.tr',
+      'icloud.com',
+      'yandex.com', 'yandex.ru', 'yandex.com.tr',
+      'proton.me', 'protonmail.com',
+      'mail.com', 'gmx.com'
+    ];
+
+    function isCorporateEmail(email) {
+      if (!email) return false;
+      const atIndex = email.lastIndexOf('@');
+      if (atIndex === -1) return false;
+      const domain = email.slice(atIndex + 1).toLowerCase().trim();
+      return !blockedEmailDomains.includes(domain);
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+      const forms = document.querySelectorAll('form.tr-form');
+
+      forms.forEach(function (form) {
+        const lang = document.documentElement.lang === 'tr' ? 'TR' : 'EN';
+
+        form.addEventListener('submit', async function (e) {
+          e.preventDefault();
+
+          const company = form.querySelector('[name="company"]')?.value.trim();
+          const country = form.querySelector('[name="country"]')?.value.trim();
+          const email = form.querySelector('[name="email"]')?.value.trim();
+          const product = form.querySelector('[name="product"]')?.value.trim();
+          const volume = form.querySelector('[name="volume"]')?.value.trim();
+          const port = form.querySelector('[name="port"]')?.value.trim();
+          const bank = form.querySelector('[name="bank"]')?.value.trim();
+          const message = form.querySelector('[name="message"]')?.value.trim();
+
+          // Kurumsal email kontrolü
+          if (!isCorporateEmail(email)) {
+            if (lang === 'TR') {
+              alert('Lütfen kurumsal bir e-posta adresi kullanın (gmail, hotmail vb. kişisel adresler kabul edilmiyor).');
+            } else {
+              alert('Please use a corporate email address (personal emails like gmail, hotmail etc. are not accepted).');
+            }
+            return;
+          }
+
+          const payload = {
+            language: lang,
+            company,
+            country,
+            email,
+            product,
+            volume,
+            port,
+            bank,
+            message
+          };
+
+          try {
+            const response = await fetch(GOOGLE_SCRIPT_URL, {
+              method: 'POST',
+              mode: 'no-cors',
+              headers: {
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify(payload)
+            });
+
+            form.reset();
+            if (lang === 'TR') {
+              alert('Talebiniz alındı. Uygunluk durumuna göre sizinle iletişime geçilecektir.');
+            } else {
+              alert('Your inquiry has been received. We will contact you based on availability.');
+            }
+          } catch (err) {
+            console.error(err);
+            if (lang === 'TR') {
+              alert('Bir hata oluştu. Lütfen daha sonra tekrar deneyin veya direkt e-posta ile ulaşın: satis@terrarosainternational.com');
+            } else {
+              alert('An error occurred. Please try again later or contact us directly: satis@terrarosainternational.com');
+            }
+          }
+        });
+      });
+    });
+  </script>
 </body>
 </html>
+
