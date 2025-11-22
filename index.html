@@ -1,13 +1,45 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-NDSLG54H');</script>
+  <!-- End Google Tag Manager -->
+
+  <script src="https://web.cmp.usercentrics.eu/modules/autoblocker.js"></script>
+  <script id="usercentrics-cmp" src="https://web.cmp.usercentrics.eu/ui/loader.js" data-settings-id="uRzMeo-GwCge-z" async></script>
+
   <meta charset="UTF-8" />
-  <title>TerraRosa International</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="TerraRosa International - Global emtia tedarik ve ticaret ağı. Enerji, tarım ve endüstriyel ham maddelerde ürün odaklı çözümler.">
+  <title>TerraRosa International – Global Emtia Tedarik ve Ticaret Ağı</title>
+  <meta name="description" content="Enerji, tarım ve endüstriyel hammaddelerde ürün odaklı global tedarik ve ticaret ağı. Doğrulanmış tedarikçiler ve gerçek talep için TerraRosa International.">
+  <meta name="robots" content="index, follow">
+
+  <link rel="alternate" href="https://terrarosainternational.com/index.html" hreflang="tr" />
+  <link rel="alternate" href="https://terrarosainternational.com/en.html" hreflang="en" />
+
+  <meta property="og:title" content="TerraRosa International – Global Emtia Tedarik ve Ticaret Ağı">
+  <meta property="og:description" content="Ürün odaklı, prosedür filtresi güçlü bağımsız ticaret ağı. Enerji, tarım ve endüstriyel hammaddeler.">
+  <meta property="og:url" content="https://terrarosainternational.com/">
+  <meta property="og:image" content="https://terrarosainternational.com/logo.png">
+  <meta property="og:type" content="website">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="TerraRosa International">
+  <meta name="twitter:description" content="Global emtia akışını ürün odaklı yöneten bağımsız ticaret ağı.">
+  <meta name="twitter:image" content="https://terrarosainternational.com/logo.png">
+
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NDSLG54H"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
+
   <header class="tr-header">
     <div class="tr-container tr-nav">
       <div class="tr-logo">
@@ -38,7 +70,7 @@
             <a href="#products" class="tr-btn ghost">Mevcut Ürün Grupları</a>
           </div>
           <p class="tr-hero-note">
-            Not: Ürün uygunluğu <strong>daha önce rezerv edilmiş satışlara</strong> göre
+            Not: Ürün uygunluğu <strong>önceden rezerve edilmiş satışlara</strong> göre
             dinamiktir. Her talep ayrı değerlendirilir.
           </p>
         </div>
@@ -99,7 +131,7 @@
             <h3>Prosedür &amp; Risk Filtreleme</h3>
             <p>
               Uluslararası ticarette sahte prosedür ve gerçekçi olmayan teklifleri
-              filtreleyen, operasyonel olarak uygulanabilir süreçler.
+              erken aşamada filtreleyerek, operasyonel olarak uygulanabilir süreçlere odaklanırız.
             </p>
           </div>
           <div class="tr-card">
@@ -179,4 +211,85 @@
             <p>
               TerraRosa, özellikle prosedürleri gerçek operasyonla uyumlu olmayan teklifleri
               erken aşamada filtreleyerek, hem alıcının hem satıcının vaktini korumayı amaçlar.
-            </
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- İLETİŞİM / FORM -->
+    <section id="contact" class="tr-section">
+      <div class="tr-container">
+        <h2>Talep / LOI formu</h2>
+        <p class="tr-lead">
+          Lütfen mümkün olduğunca net bilgi iletin. Form, ilk değerlendirme için kullanılır;
+          detaylı doküman alışverişi daha sonra yapılır.
+        </p>
+
+        <div class="tr-grid-2">
+          <form class="tr-form" method="POST" action="YOUR_FORM_ENDPOINT_HERE">
+            <!-- Buraya Formspree / Netlify / kendi endpoint’in gelecek -->
+            <div class="tr-field">
+              <label for="company">Şirket adı</label>
+              <input type="text" id="company" name="company" required />
+            </div>
+
+            <div class="tr-field">
+              <label for="country">Ülke</label>
+              <input type="text" id="country" name="country" required />
+            </div>
+
+            <div class="tr-field">
+              <label for="product">Talep edilen ürün</label>
+              <input type="text" id="product" name="product" placeholder="Örn: Jet A1, EN590, GMO Mısır, Üre..." required />
+            </div>
+
+            <div class="tr-field">
+              <label for="volume">Miktar &amp; periyot</label>
+              <input type="text" id="volume" name="volume" placeholder="Örn: 10,000 MT x 12 ay" />
+            </div>
+
+            <div class="tr-field">
+              <label for="port">Hedef liman / teslim noktası</label>
+              <input type="text" id="port" name="port" />
+            </div>
+
+            <div class="tr-field">
+              <label for="bank">Banka profili (kısaca)</label>
+              <input type="text" id="bank" name="bank" placeholder="Örn: Top 50 EU bank, bölgesel banka, vb." />
+            </div>
+
+            <div class="tr-field">
+              <label for="message">Ek notlar</label>
+              <textarea id="message" name="message" rows="4"></textarea>
+            </div>
+
+            <button type="submit" class="tr-btn primary full">Gönder</button>
+          </form>
+
+          <div class="tr-contact-info">
+            <h3>Doğrudan iletişim</h3>
+            <p>
+              Genel sorular için:<br/>
+              <a href="mailto:info@terrarosainternational.com">info@terrarosainternational.com</a>
+            </p>
+            <p>
+              Lütfen spam niteliğinde toplu teklif veya gerçekçi olmayan prosedürler göndermeyin.
+              Her ciddi talep teknik ve operasyonel çerçevede incelenir.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="tr-footer">
+    <div class="tr-container">
+      <span>© <span id="year"></span> TerraRosa International. All rights reserved.</span>
+    </div>
+    <script>
+      document.getElementById("year").textContent = new Date().getFullYear();
+    </script>
+  </footer>
+</body>
+</html>
