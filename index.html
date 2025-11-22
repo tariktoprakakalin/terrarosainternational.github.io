@@ -52,6 +52,7 @@
         <a href="#process">Çalışma Modeli</a>
         <a href="#contact">Talep Formu</a>
         <a href="en.html" class="tr-lang">EN</a>
+        <button id="theme-toggle" class="tr-theme-toggle" type="button">☀︎</button>
       </nav>
     </div>
 
@@ -295,99 +296,137 @@
     </script>
   </footer>
 
-  <!-- Form JS: Google Sheets entegrasyonu + kurumsal e-posta kontrolü -->
+  <!-- Tema + Form JS -->
   <script>
-  // Google Apps Script Web App URL - senin çalışan endpoint'in
-  const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyiG3S1XCYsZkFEILnxgFqAF12ABUEBfvTH0VxngPFoFq3J9latmScC6WbpJEoqbJ5d/exec';
+    // ==== TEMA SİSTEMİ ====
+    function applyTheme(theme) {
+      document.body.classList.remove('theme-light', 'theme-dark');
+      document.body.classList.add('theme-' + theme);
+      const btn = document.getElementById('theme-toggle');
+      if (btn) {
+        btn.textContent = theme === 'dark' ? '☀︎' : '☾';
+        btn.setAttribute('aria-label', theme === 'dark'
+          ? 'Açık temaya geç'
+          : 'Koyu temaya geç');
+      }
+      try {
+        localStorage.setItem('terraTheme', theme);
+      } catch (e) {}
+    }
 
-  // Kurumsal email kontrolü - free mail domainlerini engelle
-  const blockedEmailDomains = [
-    'gmail.com', 'gmail.com.tr',
-    'yahoo.com', 'yahoo.com.tr',
-    'hotmail.com', 'hotmail.com.tr',
-    'outlook.com', 'outlook.com.tr',
-    'live.com', 'live.com.tr',
-    'icloud.com',
-    'yandex.com', 'yandex.ru', 'yandex.com.tr',
-    'proton.me', 'protonmail.com',
-    'mail.com', 'gmx.com'
-  ];
-
-  function isCorporateEmail(email) {
-    if (!email) return false;
-    const atIndex = email.lastIndexOf('@');
-    if (atIndex === -1) return false;
-    const domain = email.slice(atIndex + 1).toLowerCase().trim();
-    return !blockedEmailDomains.includes(domain);
-  }
-
-  document.addEventListener('DOMContentLoaded', function () {
-    const forms = document.querySelectorAll('form.tr-form');
-
-    forms.forEach(function (form) {
-      const lang = document.documentElement.lang === 'tr' ? 'TR' : 'EN';
-
-      form.addEventListener('submit', async function (e) {
-        e.preventDefault();
-
-        const company = form.querySelector('[name="company"]')?.value.trim();
-        const country = form.querySelector('[name="country"]')?.value.trim();
-        const email = form.querySelector('[name="email"]')?.value.trim();
-        const product = form.querySelector('[name="product"]')?.value.trim();
-        const volume = form.querySelector('[name="volume"]')?.value.trim();
-        const port = form.querySelector('[name="port"]')?.value.trim();
-        const bank = form.querySelector('[name="bank"]')?.value.trim();
-        const message = form.querySelector('[name="message"]')?.value.trim();
-
-        // Kurumsal email kontrolü
-        if (!isCorporateEmail(email)) {
-          if (lang === 'TR') {
-            alert('Lütfen kurumsal bir e-posta adresi kullanın (gmail, hotmail vb. kişisel adresler kabul edilmiyor).');
-          } else {
-            alert('Please use a corporate email address (personal emails like gmail, hotmail etc. are not accepted).');
-          }
-          return;
+    function initTheme() {
+      let theme = 'dark';
+      try {
+        const stored = localStorage.getItem('terraTheme');
+        if (stored === 'light' || stored === 'dark') {
+          theme = stored;
+        } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
+          theme = 'light';
         }
+      } catch (e) {}
+      applyTheme(theme);
+    }
 
-        // URL-encoded body hazırlıyoruz
-        const payload = new URLSearchParams({
-          language: lang,
-          company: company || '',
-          country: country || '',
-          email: email || '',
-          product: product || '',
-          volume: volume || '',
-          port: port || '',
-          bank: bank || '',
-          message: message || ''
+    document.addEventListener('DOMContentLoaded', function () {
+      // Tema ilk yükleme
+      initTheme();
+
+      const themeBtn = document.getElementById('theme-toggle');
+      if (themeBtn) {
+        themeBtn.addEventListener('click', function () {
+          const isDark = document.body.classList.contains('theme-dark') ||
+                         !document.body.classList.contains('theme-light');
+          applyTheme(isDark ? 'light' : 'dark');
         });
+      }
 
-        try {
-          const response = await fetch(GOOGLE_SCRIPT_URL, {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
-            },
-            body: payload.toString()
+      // ==== FORM + GOOGLE SHEETS ====
+      const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyiG3S1XCYsZkFEILnxgFqAF12ABUEBfvTH0VxngPFoFq3J9latmScC6WbpJEoqbJ5d/exec';
+
+      const blockedEmailDomains = [
+        'gmail.com', 'gmail.com.tr',
+        'yahoo.com', 'yahoo.com.tr',
+        'hotmail.com', 'hotmail.com.tr',
+        'outlook.com', 'outlook.com.tr',
+        'live.com', 'live.com.tr',
+        'icloud.com',
+        'yandex.com', 'yandex.ru', 'yandex.com.tr',
+        'proton.me', 'protonmail.com',
+        'mail.com', 'gmx.com'
+      ];
+
+      function isCorporateEmail(email) {
+        if (!email) return false;
+        const atIndex = email.lastIndexOf('@');
+        if (atIndex === -1) return false;
+        const domain = email.slice(atIndex + 1).toLowerCase().trim();
+        return !blockedEmailDomains.includes(domain);
+      }
+
+      const forms = document.querySelectorAll('form.tr-form');
+
+      forms.forEach(function (form) {
+        const lang = document.documentElement.lang === 'tr' ? 'TR' : 'EN';
+
+        form.addEventListener('submit', async function (e) {
+          e.preventDefault();
+
+          const company = form.querySelector('[name="company"]')?.value.trim();
+          const country = form.querySelector('[name="country"]')?.value.trim();
+          const email = form.querySelector('[name="email"]')?.value.trim();
+          const product = form.querySelector('[name="product"]')?.value.trim();
+          const volume = form.querySelector('[name="volume"]')?.value.trim();
+          const port = form.querySelector('[name="port"]')?.value.trim();
+          const bank = form.querySelector('[name="bank"]')?.value.trim();
+          const message = form.querySelector('[name="message"]')?.value.trim();
+
+          if (!isCorporateEmail(email)) {
+            if (lang === 'TR') {
+              alert('Lütfen kurumsal bir e-posta adresi kullanın (gmail, hotmail vb. kişisel adresler kabul edilmiyor).');
+            } else {
+              alert('Please use a corporate email address (personal emails like gmail, hotmail etc. are not accepted).');
+            }
+            return;
+          }
+
+          const payload = new URLSearchParams({
+            language: lang,
+            company: company || '',
+            country: country || '',
+            email: email || '',
+            product: product || '',
+            volume: volume || '',
+            port: port || '',
+            bank: bank || '',
+            message: message || ''
           });
 
-          form.reset();
-          if (lang === 'TR') {
-            alert('Talebiniz alındı. Uygunluk durumuna göre sizinle iletişime geçilecektir.');
-          } else {
-            alert('Your inquiry has been received. We will contact you based on availability.');
+          try {
+            await fetch(GOOGLE_SCRIPT_URL, {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
+              },
+              body: payload.toString()
+            });
+
+            form.reset();
+            if (lang === 'TR') {
+              alert('Talebiniz alındı. Uygunluk durumuna göre sizinle iletişime geçilecektir.');
+            } else {
+              alert('Your inquiry has been received. We will contact you based on availability.');
+            }
+          } catch (err) {
+            console.error(err);
+            if (lang === 'TR') {
+              alert('Bir hata oluştu. Lütfen daha sonra tekrar deneyin veya direkt e-posta ile ulaşın: satis@terrarosainternational.com');
+            } else {
+              alert('An error occurred. Please try again later or contact us directly: satis@terrarosainternational.com');
+            }
           }
-        } catch (err) {
-          console.error(err);
-          if (lang === 'TR') {
-            alert('Bir hata oluştu. Lütfen daha sonra tekrar deneyin veya direkt e-posta ile ulaşın: satis@terrarosainternational.com');
-          } else {
-            alert('An error occurred. Please try again later or contact us directly: satis@terrarosainternational.com');
-          }
-        }
+        });
       });
     });
-  });
   </script>
 
 </body>
