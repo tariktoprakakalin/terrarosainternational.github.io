@@ -1,15 +1,15 @@
-/* ====== GENEL ====== */
+/* ====== GLOBAL ====== */
 
 body {
   margin: 0;
   font-family: system-ui, -apple-system, sans-serif;
-  background: #ffffff;
-  color: #111111;
+  background: #0d0d0d;   /* graphit black */
+  color: #e6e6e6;        /* soft white */
   line-height: 1.6;
 }
 
 a {
-  color: #0070cc;
+  color: #5fb3ff;
   text-decoration: none;
 }
 a:hover {
@@ -28,7 +28,8 @@ a:hover {
   text-align: center;
   padding-top: 1.5rem;
   padding-bottom: 0.5rem;
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid #222;
+  background: #0d0d0d;
 }
 
 .tr-nav {
@@ -38,7 +39,7 @@ a:hover {
   gap: 1.2rem;
 }
 
-/* LOGO tam ortalanır ve büyük görünür */
+/* Logo ortalı ve büyük */
 .tr-logo {
   display: flex;
   justify-content: center;
@@ -46,7 +47,7 @@ a:hover {
 }
 
 .tr-logo img {
-  max-width: 340px;   /* İstersen 360–380 yapabilirsin */
+  max-width: 340px;
   height: auto;
   display: block;
 }
@@ -59,29 +60,36 @@ a:hover {
   gap: 1rem;
 }
 
-.tr-lang {
-  font-weight: bold;
+.tr-menu a {
+  font-weight: 500;
+  color: #dcdcdc;
 }
 
 /* ====== HERO ====== */
 
 .tr-hero {
   padding: 3rem 0 2rem;
-}
-
-.tr-hero-inner {
-  display: flex;
-  justify-content: center;
+  background: #111; /* daha koyu hero bölümü */
 }
 
 .tr-hero-text {
-  max-width: 700px;
+  max-width: 680px;
   text-align: center;
+  margin: auto;
 }
 
 .tr-hero h1 {
   font-size: 2rem;
   margin-bottom: 1rem;
+  color: #ffffff;
+}
+
+.tr-hero p {
+  color: #cccccc;
+}
+
+.tr-hero strong {
+  color: #ffffff;
 }
 
 .tr-btn {
@@ -92,13 +100,13 @@ a:hover {
 }
 
 .tr-btn.primary {
-  background: #111;
-  color: #fff;
+  background: #ffffff;
+  color: #000000;
 }
 
 .tr-btn.ghost {
-  border: 1px solid #111;
-  color: #111;
+  border: 1px solid #ffffff;
+  color: #ffffff;
 }
 
 .tr-hero-actions {
@@ -117,10 +125,11 @@ a:hover {
 
 .tr-section {
   padding: 3rem 0;
+  color: #e6e6e6;
 }
 
 .tr-section-alt {
-  background: #fafafa;
+  background: #141414;
 }
 
 .tr-lead {
@@ -129,7 +138,7 @@ a:hover {
   margin-bottom: 2rem;
 }
 
-/* ====== GRID YAPILARI ====== */
+/* ====== GRID ====== */
 
 .tr-grid-3 {
   display: grid;
@@ -143,33 +152,18 @@ a:hover {
   gap: 2.5rem;
 }
 
-/* Kartlar */
+/* Kart tasarımı */
 .tr-card {
   padding: 1.5rem;
-  background: #ffffff;
+  background: #1b1b1b;
   border-radius: 8px;
-  border: 1px solid #eee;
-}
-
-/* Süreç listesi */
-.tr-step-list {
-  list-style: decimal;
-  padding-left: 1.2rem;
-}
-.tr-step-list li {
-  margin-bottom: 1rem;
+  border: 1px solid #2e2e2e;
 }
 
 /* ====== FORM ====== */
 
-.tr-form .tr-field {
-  margin-bottom: 1rem;
-}
-
 .tr-form label {
-  display: block;
   font-weight: 600;
-  margin-bottom: 0.3rem;
 }
 
 .tr-form input,
@@ -177,9 +171,9 @@ a:hover {
   width: 100%;
   padding: 0.6rem;
   border-radius: 6px;
-  border: 1px solid #ccc;
-  font-size: 1rem;
-  font-family: inherit;
+  border: 1px solid #444;
+  background: #111;
+  color: #e6e6e6;
 }
 
 .tr-btn.full {
@@ -194,13 +188,13 @@ a:hover {
   margin-top: 4rem;
   padding: 2rem 0;
   text-align: center;
-  background: #fafafa;
+  background: #0d0d0d;
   color: #777;
   font-size: 0.9rem;
+  border-top: 1px solid #222;
 }
 
 /* ====== MOBILE ====== */
-
 @media (max-width: 600px) {
   .tr-logo img {
     max-width: 260px;
@@ -217,6 +211,12 @@ a:hover {
   .tr-hero h1 {
     font-size: 1.45rem;
   }
+
+  .tr-hero-actions {
+    flex-direction: column;
+  }
+}
+
 
   .tr-hero-actions {
     flex-direction: column;
