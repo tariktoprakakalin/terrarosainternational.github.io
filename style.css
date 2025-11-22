@@ -348,3 +348,55 @@ body {
     padding-top: 20px;
   }
 }
+
+/* ==== LOGO & HEADER AYARLARI (override) ==== */
+
+.tr-header {
+  text-align: center;
+}
+
+/* Üst barı dikey hizaya yaklaştıralım */
+.tr-nav {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+/* Logo bloğu: ortalı, alt alta */
+.tr-logo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.15rem;
+}
+
+/* LOGO BOYUTU: buradan oynayabilirsin */
+.tr-logo img {
+  max-width: 320px;   /* istersen 360 da yapabilirsin */
+  height: auto;
+  display: block;
+}
+
+/* "TerraRosa International" yazısını biraz sade ve küçük tutalım */
+.tr-logo span {
+  font-size: 0.9rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  opacity: 0.8;
+}
+
+/* Menü logonun altına gelsin */
+.tr-menu {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.75rem;
+}
+
+/* Mobile’da logoyu ekran genişliğine göre küçült */
+@media (max-width: 600px) {
+  .tr-logo img {
+    max-width: 260px;
+  }
+}
