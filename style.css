@@ -1,414 +1,36 @@
-:root {
-  --bg: #050608;
-  --bg-alt: #0c0f16;
-  --card: #111520;
-  --border: #232737;
-  --text: #f5f5f5;
-  --muted: #a0a4b5;
-  --accent: #e65a35;
-  --accent-soft: rgba(230, 90, 53, 0.14);
-  --radius: 10px;
-  --shadow-soft: 0 18px 45px rgba(0, 0, 0, 0.65);
-  --max-width: 1080px;
-  --font-main: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-}
-
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-}
-
-html, body {
-  margin: 0;
-  padding: 0;
-  background: radial-gradient(circle at top, #151824 0, #050608 45%);
-  color: var(--text);
-  font-family: var(--font-main);
-}
+/* ====== GENEL ====== */
 
 body {
+  margin: 0;
+  font-family: system-ui, -apple-system, sans-serif;
+  background: #ffffff;
+  color: #111111;
   line-height: 1.6;
 }
 
-/* Layout */
+a {
+  color: #0070cc;
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+}
 
 .tr-container {
-  max-width: var(--max-width);
-  margin: 0 auto;
-  padding: 0 16px;
+  width: 90%;
+  max-width: 1200px;
+  margin: auto;
 }
 
-.tr-header {
-  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
-}
-
-/* Nav */
-
-.tr-nav {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 16px 16px 8px;
-}
-
-.tr-logo {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  font-size: 13px;
-  color: var(--muted);
-}
-
-.tr-logo img {
-  width: 120px;
-  height: auto;
-  border-radius: 6px;
-  border: 1px solid rgba(255, 255, 255, 0.15);
-}
-
-.tr-menu {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 14px;
-  font-size: 13px;
-}
-
-.tr-menu a {
-  text-decoration: none;
-  color: var(--muted);
-  padding: 4px 0;
-  position: relative;
-}
-
-.tr-menu a::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: -4px;
-  width: 0;
-  height: 2px;
-  background: var(--accent);
-  transition: width 0.18s ease-out;
-}
-
-.tr-menu a:hover::after {
-  width: 100%;
-}
-
-.tr-menu .tr-lang {
-  padding: 4px 8px;
-  border-radius: 999px;
-  border: 1px solid rgba(255, 255, 255, 0.16);
-}
-
-/* Hero */
-
-.tr-hero {
-  padding: 40px 0 32px;
-}
-
-.tr-hero-inner {
-  display: flex;
-  flex-direction: column;
-}
-
-.tr-hero-text h1 {
-  font-size: clamp(26px, 4vw, 34px);
-  margin: 8px 0 16px;
-}
-
-.tr-hero-text p {
-  color: var(--muted);
-  max-width: 620px;
-}
-
-.tr-hero-actions {
-  margin-top: 20px;
-  display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
-}
-
-.tr-hero-note {
-  margin-top: 12px;
-  font-size: 13px;
-  color: var(--muted);
-}
-
-/* Sections */
-
-.tr-section {
-  padding: 40px 0;
-}
-
-.tr-section-alt {
-  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.2));
-}
-
-.tr-section h2 {
-  font-size: 20px;
-  margin-bottom: 8px;
-}
-
-.tr-lead {
-  color: var(--muted);
-  max-width: 760px;
-}
-
-/* Grids */
-
-.tr-grid-3 {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 16px;
-  margin-top: 24px;
-}
-
-.tr-grid-2 {
-  display: grid;
-  grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
-  gap: 24px;
-  margin-top: 24px;
-}
-
-@media (max-width: 800px) {
-  .tr-grid-2 {
-    grid-template-columns: 1fr;
-  }
-}
-
-/* Cards */
-
-.tr-card {
-  background: var(--card);
-  border-radius: var(--radius);
-  padding: 16px 16px 14px;
-  border: 1px solid var(--border);
-  box-shadow: var(--shadow-soft);
-}
-
-.tr-card h3 {
-  font-size: 15px;
-  margin-top: 0;
-  margin-bottom: 6px;
-}
-
-.tr-card p, .tr-card li {
-  font-size: 14px;
-  color: var(--muted);
-}
-
-.tr-card ul {
-  list-style: none;
-  padding-left: 0;
-  margin: 8px 0 0;
-}
-
-.tr-card ul li::before {
-  content: "• ";
-  color: var(--accent);
-}
-
-/* Buttons */
-
-.tr-btn {
-  border-radius: 999px;
-  padding: 8px 16px;
-  font-size: 13px;
-  border: 1px solid transparent;
-  cursor: pointer;
-  text-decoration: none;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
-}
-
-.tr-btn.primary {
-  background: var(--accent);
-  color: white;
-  box-shadow: 0 12px 30px rgba(230, 90, 53, 0.5);
-}
-
-.tr-btn.primary:hover {
-  filter: brightness(1.08);
-}
-
-.tr-btn.ghost {
-  border-color: rgba(255, 255, 255, 0.2);
-  color: var(--muted);
-  background: rgba(255, 255, 255, 0.02);
-}
-
-.tr-btn.full {
-  width: 100%;
-}
-
-/* Lists */
-
-.tr-step-list {
-  list-style: none;
-  padding-left: 0;
-  margin: 0;
-}
-
-.tr-step-list li {
-  margin-bottom: 10px;
-  font-size: 14px;
-  color: var(--muted);
-}
-
-/* Form */
-
-.tr-form {
-  background: var(--card);
-  border-radius: var(--radius);
-  padding: 16px;
-  border: 1px solid var(--border);
-  box-shadow: var(--shadow-soft);
-}
-
-.tr-field {
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 10px;
-}
-
-.tr-field label {
-  font-size: 13px;
-  margin-bottom: 4px;
-  color: var(--muted);
-}
-
-.tr-field input,
-.tr-field textarea {
-  background: #050714;
-  border-radius: 8px;
-  border: 1px solid #30364a;
-  padding: 8px 10px;
-  color: var(--text);
-  font-family: inherit;
-  font-size: 14px;
-}
-
-.tr-field input:focus,
-.tr-field textarea:focus {
-  outline: none;
-  border-color: var(--accent);
-  box-shadow: 0 0 0 1px rgba(230, 90, 53, 0.5);
-}
-
-.tr-contact-info {
-  font-size: 14px;
-  color: var(--muted);
-}
-
-.tr-contact-info h3 {
-  margin-top: 0;
-  margin-bottom: 8px;
-}
-
-/* Notes */
-
-.tr-note {
-  margin-top: 18px;
-  font-size: 13px;
-  color: var(--muted);
-}
-
-/* Footer */
-
-.tr-footer {
-  border-top: 1px solid rgba(255, 255, 255, 0.06);
-  padding: 14px 0;
-  font-size: 12px;
-  color: var(--muted);
-  background: #050608;
-}
-
-/* Mobile tweaks */
-
-@media (max-width: 720px) {
-  .tr-nav {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 8px;
-  }
-
-  .tr-menu {
-    gap: 10px;
-    flex-wrap: wrap;
-  }
-
-  .tr-hero {
-    padding-top: 20px;
-  }
-}
-
-/* ==== LOGO & HEADER AYARLARI (override) ==== */
-
-.tr-header {
-  text-align: center;
-}
-
-/* Üst barı dikey hizaya yaklaştıralım */
-.tr-nav {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.75rem;
-}
-
-/* Logo bloğu: ortalı, alt alta */
-.tr-logo {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.15rem;
-}
-
-/* LOGO BOYUTU: buradan oynayabilirsin */
-.tr-logo img {
-  max-width: 320px;   /* istersen 360 da yapabilirsin */
-  height: auto;
-  display: block;
-}
-
-/* "TerraRosa International" yazısını biraz sade ve küçük tutalım */
-.tr-logo span {
-  font-size: 0.9rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  opacity: 0.8;
-}
-
-/* Menü logonun altına gelsin */
-.tr-menu {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 0.75rem;
-}
-
-/* Mobile’da logoyu ekran genişliğine göre küçült */
-@media (max-width: 600px) {
-  .tr-logo img {
-    max-width: 260px;
-  }
-}
-/* ==== LOGO OVERRIDE – Yazısız temiz header ==== */
+/* ====== HEADER & LOGO ====== */
 
 .tr-header {
   text-align: center;
   padding-top: 1.5rem;
   padding-bottom: 0.5rem;
+  border-bottom: 1px solid #eee;
 }
 
-/* Ortalanmış nav */
 .tr-nav {
   display: flex;
   flex-direction: column;
@@ -416,7 +38,7 @@ body {
   gap: 1.2rem;
 }
 
-/* Logo alanı */
+/* LOGO tam ortalanır ve büyük görünür */
 .tr-logo {
   display: flex;
   justify-content: center;
@@ -424,7 +46,7 @@ body {
 }
 
 .tr-logo img {
-  max-width: 320px;   /* Burayı 300–360 arası değiştirebilirsin */
+  max-width: 340px;   /* İstersen 360–380 yapabilirsin */
   height: auto;
   display: block;
 }
@@ -434,12 +56,169 @@ body {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 0.9rem;
+  gap: 1rem;
 }
 
-/* Mobile görünüm */
+.tr-lang {
+  font-weight: bold;
+}
+
+/* ====== HERO ====== */
+
+.tr-hero {
+  padding: 3rem 0 2rem;
+}
+
+.tr-hero-inner {
+  display: flex;
+  justify-content: center;
+}
+
+.tr-hero-text {
+  max-width: 700px;
+  text-align: center;
+}
+
+.tr-hero h1 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.tr-btn {
+  padding: 0.6rem 1.2rem;
+  border-radius: 6px;
+  font-weight: 600;
+  display: inline-block;
+}
+
+.tr-btn.primary {
+  background: #111;
+  color: #fff;
+}
+
+.tr-btn.ghost {
+  border: 1px solid #111;
+  color: #111;
+}
+
+.tr-hero-actions {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin: 1.5rem 0;
+}
+
+.tr-hero-note {
+  font-size: 0.85rem;
+  opacity: 0.7;
+}
+
+/* ====== SECTIONS ====== */
+
+.tr-section {
+  padding: 3rem 0;
+}
+
+.tr-section-alt {
+  background: #fafafa;
+}
+
+.tr-lead {
+  font-size: 1.1rem;
+  opacity: 0.85;
+  margin-bottom: 2rem;
+}
+
+/* ====== GRID YAPILARI ====== */
+
+.tr-grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+
+.tr-grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2.5rem;
+}
+
+/* Kartlar */
+.tr-card {
+  padding: 1.5rem;
+  background: #ffffff;
+  border-radius: 8px;
+  border: 1px solid #eee;
+}
+
+/* Süreç listesi */
+.tr-step-list {
+  list-style: decimal;
+  padding-left: 1.2rem;
+}
+.tr-step-list li {
+  margin-bottom: 1rem;
+}
+
+/* ====== FORM ====== */
+
+.tr-form .tr-field {
+  margin-bottom: 1rem;
+}
+
+.tr-form label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 0.3rem;
+}
+
+.tr-form input,
+.tr-form textarea {
+  width: 100%;
+  padding: 0.6rem;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+  font-family: inherit;
+}
+
+.tr-btn.full {
+  width: 100%;
+  padding: 0.8rem;
+  margin-top: 0.5rem;
+}
+
+/* ====== FOOTER ====== */
+
+.tr-footer {
+  margin-top: 4rem;
+  padding: 2rem 0;
+  text-align: center;
+  background: #fafafa;
+  color: #777;
+  font-size: 0.9rem;
+}
+
+/* ====== MOBILE ====== */
+
 @media (max-width: 600px) {
   .tr-logo img {
     max-width: 260px;
+  }
+
+  .tr-grid-3 {
+    grid-template-columns: 1fr;
+  }
+
+  .tr-grid-2 {
+    grid-template-columns: 1fr;
+  }
+
+  .tr-hero h1 {
+    font-size: 1.45rem;
+  }
+
+  .tr-hero-actions {
+    flex-direction: column;
   }
 }
