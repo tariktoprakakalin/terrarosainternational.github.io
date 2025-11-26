@@ -79,6 +79,59 @@
   </header>
 
   <main>
+    <!-- AI ÖN GÖRÜŞME -->
+    <section id="ai-desk" class="tr-section tr-section-alt">
+      <div class="tr-container">
+        <h2>TerraRosa AI – Ön Görüşme Masası</h2>
+        <p class="tr-lead">
+          Türkçe, English or any language – kısaca ne aradığınızı yazın.
+          AI, ürün, miktar, teslim noktası, ödeme yapısı ve rolünüzü
+          (alıcı / satıcı / broker) netleştirmeye yardımcı olur. Bu bir
+          fiyat teklifi veya bağlayıcı sözleşme değildir; ilk teknik tarama olarak düşünün.
+        </p>
+
+        <div class="tr-grid-2">
+          <div>
+            <div class="tr-card">
+              <form id="tr-chat-form" class="tr-form">
+                <div class="tr-field">
+                  <label for="tr-chat-input">Kısaca talebinizi yazın</label>
+                  <input
+                    id="tr-chat-input"
+                    type="text"
+                    name="ai_message"
+                    placeholder="Örn: EN590, 10.000MT, Fas teslim, aylık, DLC ödemeli..."
+                    required
+                  />
+                </div>
+                <button type="submit" class="tr-btn primary full">
+                  Gönder
+                </button>
+              </form>
+              <div id="tr-chat-status" class="tr-chat-status" style="font-size: 12px; color: #999; margin-top: 6px;"></div>
+              <div id="tr-chat-reply" class="tr-chat-reply" style="font-size: 14px; margin-top: 10px; white-space: pre-wrap;"></div>
+            </div>
+          </div>
+
+          <div>
+            <div class="tr-card">
+              <h3>Bu ne işe yarar?</h3>
+              <ul>
+                <li>Talebinizi teknik dilde toparlamaya yardımcı olur.</li>
+                <li>Hangi bilgilerin eksik olduğunu gösterir.</li>
+                <li>İsterseniz AI çıktısını formdaki <strong>Ek notlar</strong> alanına kopyalayabilirsiniz.</li>
+                <li>Dilinizi otomatik algılar ve aynı dilde cevap vermeye çalışır.</li>
+              </ul>
+              <p class="tr-note">
+                Önemli: AI yanıtları yalnızca ön değerlendirme amaçlıdır.
+                Her ciddi talep yine insan tarafından, operasyonel gerçeklik ve risk çerçevesinde incelenir.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- HAKKIMIZDA -->
     <section id="about" class="tr-section">
       <div class="tr-container">
@@ -429,7 +482,50 @@
     });
   </script>
 
+  <!-- TerraRosa AI – frontend entegrasyonu -->
+  <script>
+    (function () {
+      const form = document.getElementById("tr-chat-form");
+      const input = document.getElementById("tr-chat-input");
+      const statusEl = document.getElementById("tr-chat-status");
+      const replyEl = document.getElementById("tr-chat-reply");
+
+      if (!form || !input || !statusEl || !replyEl) return;
+
+      form.addEventListener("submit", async function (e) {
+        e.preventDefault();
+        const text = (input.value || "").trim();
+        if (!text) return;
+
+        statusEl.textContent = "AI düşünüyor...";
+        replyEl.textContent = "";
+        input.disabled = true;
+
+        try {
+          const resp = await fetch("/api/chat", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ message: text }),
+          });
+
+          const data = await resp.json();
+          if (data.error) {
+            statusEl.textContent = "Hata: " + data.error;
+          } else {
+            statusEl.textContent = "";
+            replyEl.textContent = data.reply || "(Yanıt alınamadı)";
+          }
+        } catch (err) {
+          console.error(err);
+          statusEl.textContent = "Bağlantı hatası. Lütfen daha sonra tekrar deneyin.";
+        } finally {
+          input.disabled = false;
+          input.value = "";
+          input.focus();
+        }
+      });
+    })();
+  </script>
+
 </body>
 </html>
-
-
