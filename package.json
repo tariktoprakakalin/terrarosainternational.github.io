@@ -1,0 +1,9 @@
+{
+  "name": "terrarosa-ai",
+  "version": "1.0.0",
+  "description": "TerraRosa International AI Desk",
+  "main": "api/chat.js",
+  "dependencies": {
+    "openai": "^4.0.0"
+  }
+}
