@@ -1,91 +1,69 @@
 // api/chat.js
-// Vercel Serverless Function – TerraRosa basit AI endpoint
+
+import OpenAI from "openai";
+
+const client = new OpenAI({
+  apiKey: process.env.OPENAI_API_KEY,
+});
 
 export default async function handler(req, res) {
-  // Sadece POST kabul ediyoruz
   if (req.method !== "POST") {
-    res.setHeader("Allow", "POST");
-    return res.status(405).json({ error: "Only POST is allowed" });
+    res.status(405).json({ error: "Method not allowed" });
+    return;
   }
 
   try {
-    // Vercel bazen body'yi direkt obje, bazen string geçebiliyor
-    let body = req.body;
-    if (typeof body === "string") {
-      try {
-        body = JSON.parse(body);
-      } catch (e) {
-        // parse edilemezse olduğu gibi bırak
-      }
-    }
+    const { message, history } = req.body || {};
 
-    const userMessage = body?.message;
-    if (!userMessage || typeof userMessage !== "string") {
-      return res
-        .status(400)
-        .json({ error: "Field 'message' (string) is required in JSON body." });
-    }
-
-    const apiKey = process.env.OPENAI_API_KEY;
-    if (!apiKey) {
-      console.error("OPENAI_API_KEY is not set");
-      return res
-        .status(500)
-        .json({ error: "Server misconfigured (no OPENAI_API_KEY)" });
-    }
-
-    // Sistem rolü: TerraRosa AI
+    // Mesaj listesini oluştur
     const messages = [
       {
         role: "system",
         content: `
-You are TerraRosa AI Desk. 
-- Detect the user's language and answer in that language (TR/EN or others).
-- Your job is to quickly understand:
-  - product
-  - volume
-  - origin/destination
-  - payment method
-  - timing
-  - is the user buyer, seller, or broker
+You are TerraRosa AI Desk.
+
+- Automatically detect the user's language and reply in the same language (TR/EN or any other).
+- Your job:
+  - Understand: product, quantity & period, origin/destination, payment method, timing, and whether the user is buyer/seller/broker.
+  - Help the user structure a clear, concise inquiry (mini-LOI style).
 - Do NOT give prices or binding offers.
-- Be short, clear, and neutral.
-      `.trim(),
+- If the user asks vague things, ask specific follow-up questions.
+- Be short, clear, neutral, and professional.
+`.trim(),
       },
-      { role: "user", content: userMessage },
     ];
 
-    // OpenAI Chat API çağrısı
-    const openaiResponse = await fetch(
-      "https://api.openai.com/v1/chat/completions",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${apiKey}`,
-        },
-        body: JSON.stringify({
-          model: "gpt-4o-mini", // istersen sonra değiştirirsin
-          messages,
-          temperature: 0.4,
-        }),
+    // Frontend'den gelen history'yi ekle (varsa)
+    if (Array.isArray(history) && history.length > 0) {
+      for (const msg of history) {
+        if (
+          msg &&
+          (msg.role === "user" || msg.role === "assistant") &&
+          typeof msg.content === "string"
+        ) {
+          messages.push({ role: msg.role, content: msg.content });
+        }
       }
-    );
-
-    if (!openaiResponse.ok) {
-      const errText = await openaiResponse.text();
-      console.error("OpenAI error:", errText);
-      return res.status(500).json({ error: "OpenAI request failed" });
+    } else if (typeof message === "string" && message.trim()) {
+      // Eski tek-mesaj modeli de bozulmasın
+      messages.push({ role: "user", content: message.trim() });
+    } else {
+      res.status(400).json({ error: "No input provided" });
+      return;
     }
 
-    const data = await openaiResponse.json();
-    const reply =
-      data.choices?.[0]?.message?.content?.trim() ||
-      "Şu an yanıt üretilemiyor, lütfen daha sonra tekrar deneyin.";
+    const completion = await client.chat.completions.create({
+      model: "gpt-4.1-mini",
+      messages,
+      max_tokens: 400,
+      temperature: 0.4,
+    });
 
-    return res.status(200).json({ reply });
+    const reply = completion.choices?.[0]?.message?.content || "";
+
+    res.status(200).json({ reply });
   } catch (err) {
-    console.error("Chat handler error:", err);
-    return res.status(500).json({ error: "Internal server error" });
+    console.error(err);
+    res.status(500).json({ error: "AI error" });
   }
 }

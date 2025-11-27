@@ -484,48 +484,59 @@
 
   <!-- TerraRosa AI – frontend entegrasyonu -->
   <script>
-    (function () {
-      const form = document.getElementById("tr-chat-form");
-      const input = document.getElementById("tr-chat-input");
-      const statusEl = document.getElementById("tr-chat-status");
-      const replyEl = document.getElementById("tr-chat-reply");
+  (function () {
+    const form = document.getElementById("tr-chat-form");
+    const input = document.getElementById("tr-chat-input");
+    const statusEl = document.getElementById("tr-chat-status");
+    const replyEl = document.getElementById("tr-chat-reply");
 
-      if (!form || !input || !statusEl || !replyEl) return;
+    // Bu array sadece bu browser sekmesinde yaşıyor
+    const history = [];
 
-      form.addEventListener("submit", async function (e) {
-        e.preventDefault();
-        const text = (input.value || "").trim();
-        if (!text) return;
+    if (!form || !input || !statusEl || !replyEl) return;
 
-        statusEl.textContent = "AI düşünüyor...";
-        replyEl.textContent = "";
-        input.disabled = true;
+    form.addEventListener("submit", async function (e) {
+      e.preventDefault();
+      const text = (input.value || "").trim();
+      if (!text) return;
 
-        try {
-          const resp = await fetch("/api/chat", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ message: text }),
-          });
+      // Kullanıcının mesajını önce history'ye ekle
+      history.push({ role: "user", content: text });
 
-          const data = await resp.json();
-          if (data.error) {
-            statusEl.textContent = "Hata: " + data.error;
-          } else {
-            statusEl.textContent = "";
-            replyEl.textContent = data.reply || "(Yanıt alınamadı)";
-          }
-        } catch (err) {
-          console.error(err);
-          statusEl.textContent = "Bağlantı hatası. Lütfen daha sonra tekrar deneyin.";
-        } finally {
-          input.disabled = false;
-          input.value = "";
-          input.focus();
+      statusEl.textContent = "AI düşünüyor...";
+      replyEl.textContent = "";
+      input.disabled = true;
+
+      try {
+        const resp = await fetch("/api/chat", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ history }),
+        });
+
+        const data = await resp.json();
+        if (data.error) {
+          statusEl.textContent = "Hata: " + data.error;
+        } else {
+          const replyText = data.reply || "(Yanıt alınamadı)";
+          statusEl.textContent = "";
+          replyEl.textContent = replyText;
+
+          // Asistan cevabını da history'ye ekle
+          history.push({ role: "assistant", content: replyText });
         }
-      });
-    })();
-  </script>
+      } catch (err) {
+        console.error(err);
+        statusEl.textContent = "Bağlantı hatası. Lütfen daha sonra tekrar deneyin.";
+      } finally {
+        input.disabled = false;
+        input.value = "";
+        input.focus();
+      }
+    });
+  })();
+</script>
+
 
 </body>
 </html>
