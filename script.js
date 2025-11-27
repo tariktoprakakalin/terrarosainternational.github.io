@@ -35,7 +35,7 @@ function initTheme() {
 }
 
 // ==== FORM + GOOGLE SHEETS ====
-const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyiG3S1XCYsZkFEILnxgFqAF12ABUEBfvTH0VxngPFoFq3J9latmScC6WbpJEoqbJ5d/exec';
+const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyj5wU0DQ1CnAsVnxFRAlStBJPYeLPBtS46My6OB1pbabULdYszze-dThMdM4KaMJzZ/exec';
 
 const blockedEmailDomains = [
   'gmail.com', 'gmail.com.tr',
@@ -304,3 +304,4 @@ document.addEventListener('DOMContentLoaded', function () {
     yearEl.textContent = new Date().getFullYear();
   }
 });
+
