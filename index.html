@@ -224,97 +224,64 @@
               TerraRosa, özellikle prosedürleri gerçek operasyonla uyumlu olmayan teklifleri
               erken aşamada filtreleyerek, hem alıcının hem satıcının vaktini korumayı amaçlar.
             </p>
+            <form class="tr-form">
+              <div class="tr-field">
+                <label for="company">Şirket adı</label>
+                <input type="text" id="company" name="company" required />
+              </div>
+
+              <div class="tr-field">
+                <label for="country">Ülke</label>
+                <input type="text" id="country" name="country" required />
+              </div>
+
+              <div class="tr-field">
+                <label for="email">Kurumsal e-posta</label>
+                <input type="email" id="email" name="email" required placeholder="name@company.com" />
+              </div>
+
+              <div class="tr-field">
+                <label for="product">Talep edilen ürün</label>
+                <input type="text" id="product" name="product" placeholder="Örn: Jet A1, EN590, GMO Mısır, Üre..."
+                  required />
+              </div>
+
+              <div class="tr-field">
+                <label for="volume">Miktar &amp; periyot</label>
+                <input type="text" id="volume" name="volume" placeholder="Örn: 10,000 MT x 12 ay" />
+              </div>
+
+              <div class="tr-field">
+                <label for="port">Hedef liman / teslim noktası</label>
+                <input type="text" id="port" name="port" />
+              </div>
+
+              <div class="tr-field">
+                <label for="bank">Banka profili (kısaca)</label>
+                <input type="text" id="bank" name="bank" placeholder="Örn: Top 50 EU bank, bölgesel banka, vb." />
+              </div>
+
+              <div class="tr-field">
+                <label for="message">Ek notlar</label>
+                <textarea id="message" name="message" rows="4"></textarea>
+              </div>
+
+              <button type="submit" class="tr-btn primary full">Gönder</button>
+            </form>
+
+            <div class="tr-contact-info">
+              <h3>Doğrudan iletişim</h3>
+              <p>
+                Genel sorular için:<br />
+                <a href="mailto:satis@terrarosainternational.com">satis@terrarosainternational.com</a>
+              </p>
+              <p>
+                Lütfen spam niteliğinde toplu teklif veya gerçekçi olmayan prosedürler göndermeyin.
+                Her ciddi talep teknik ve operasyonel çerçevede incelenir.
+              </p>
+            </div>
           </div>
         </div>
-      </div>
-    </section>
-
-    <!-- AI ÖN GÖRÜŞME -->
-    <section id="ai-desk" class="tr-section tr-section-alt">
-      <div class="tr-container">
-        <h2>TerraRosa AI – Ön Görüşme Masası</h2>
-        <p class="tr-lead">
-          Türkçe, English or any language – kısaca ne aradığınızı yazın.
-          AI, ürün, miktar, teslim noktası, ödeme yapısı ve rolünüzü
-          (alıcı / satıcı / broker) netleştirmeye yardımcı olur. Bu bir
-        <ul>
-          <li>Talebinizi teknik dilde toparlamaya yardımcı olur.</li>
-          <li>Hangi bilgilerin eksik olduğunu gösterir.</li>
-          <li>İsterseniz AI çıktısını formdaki <strong>Ek notlar</strong> alanına kopyalayabilirsiniz.</li>
-          <li>Dilinizi otomatik algılar ve aynı dilde cevap vermeye çalışır.</li>
-        </ul>
-        <p class="tr-note">
-          Önemli: AI yanıtları yalnızca ön değerlendirme amaçlıdır.
-          Her ciddi talep yine insan tarafından, operasyonel gerçeklik ve risk çerçevesinde incelenir.
-        </p>
-      </div>
-      </div>
-      </div>
-      </div>
-    </section>
-
-    <!-- İLETİŞİM / FORM -->
-    <section id="contact" class="tr-section">
-      <div class="tr-container">
-        <div class="tr-grid-2">
-          <form class="tr-form">
-            <div class="tr-field">
-              <label for="company">Şirket adı</label>
-              <input type="text" id="company" name="company" required />
-            </div>
-
-            <div class="tr-field">
-              <label for="country">Ülke</label>
-              <input type="text" id="country" name="country" required />
-            </div>
-
-            <div class="tr-field">
-              <label for="email">Kurumsal e-posta</label>
-              <input type="email" id="email" name="email" required placeholder="name@company.com" />
-            </div>
-
-            <div class="tr-field">
-              <label for="product">Talep edilen ürün</label>
-              <input type="text" id="product" name="product" placeholder="Örn: Jet A1, EN590, GMO Mısır, Üre..."
-                required />
-            </div>
-
-            <div class="tr-field">
-              <label for="volume">Miktar &amp; periyot</label>
-              <input type="text" id="volume" name="volume" placeholder="Örn: 10,000 MT x 12 ay" />
-            </div>
-
-            <div class="tr-field">
-              <label for="port">Hedef liman / teslim noktası</label>
-              <input type="text" id="port" name="port" />
-            </div>
-
-            <div class="tr-field">
-              <label for="bank">Banka profili (kısaca)</label>
-              <input type="text" id="bank" name="bank" placeholder="Örn: Top 50 EU bank, bölgesel banka, vb." />
-            </div>
-
-            <div class="tr-field">
-              <label for="message">Ek notlar</label>
-              <textarea id="message" name="message" rows="4"></textarea>
-            </div>
-
-            <button type="submit" class="tr-btn primary full">Gönder</button>
-          </form>
-
-          <div class="tr-contact-info">
-            <h3>Doğrudan iletişim</h3>
-            <p>
-              Genel sorular için:<br />
-              <a href="mailto:satis@terrarosainternational.com">satis@terrarosainternational.com</a>
-            </p>
-            <p>
-              Lütfen spam niteliğinde toplu teklif veya gerçekçi olmayan prosedürler göndermeyin.
-              Her ciddi talep teknik ve operasyonel çerçevede incelenir.
-            </p>
-          </div>
-        </div>
-      </div>
     </section>
   </main>
 
