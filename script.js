@@ -62,6 +62,8 @@ function initForms() {
 
   forms.forEach(function (form) {
     const lang = document.documentElement.lang === 'tr' ? 'TR' : 'EN';
+    const statusEl = form.querySelector('.tr-form-status');
+    const submitBtn = form.querySelector('button[type="submit"]');
 
     form.addEventListener('submit', async function (e) {
       e.preventDefault();
@@ -75,6 +77,12 @@ function initForms() {
       const bank = form.querySelector('[name="bank"]')?.value.trim();
       const message = form.querySelector('[name="message"]')?.value.trim();
 
+      function setStatus(text, type) {
+        if (!statusEl) return;
+        statusEl.textContent = text || '';
+        statusEl.className = 'tr-form-status' + (type ? ' ' + type : '');
+      }
+
       if (!isCorporateEmail(email)) {
         if (lang === 'TR') {
           alert('Lütfen kurumsal bir e-posta adresi kullanın (gmail, hotmail vb. kişisel adresler kabul edilmiyor).');
@@ -83,6 +91,9 @@ function initForms() {
         }
         return;
       }
+
+      setStatus(lang === 'TR' ? 'Gönderiliyor...' : 'Sending...', 'pending');
+      if (submitBtn) submitBtn.disabled = true;
 
       const payload = new URLSearchParams({
         language: lang,
@@ -106,6 +117,7 @@ function initForms() {
         });
 
         form.reset();
+        setStatus(lang === 'TR' ? 'Talebiniz alındı.' : 'Your inquiry has been received.', 'success');
         if (lang === 'TR') {
           alert('Talebiniz alındı. Uygunluk durumuna göre sizinle iletişime geçilecektir.');
         } else {
@@ -113,11 +125,14 @@ function initForms() {
         }
       } catch (err) {
         console.error(err);
+        setStatus(lang === 'TR' ? 'Hata oluştu, lütfen tekrar deneyin.' : 'Error occurred, please try again.', 'error');
         if (lang === 'TR') {
           alert('Bir hata oluştu. Lütfen daha sonra tekrar deneyin veya direkt e-posta ile ulaşın: satis@terrarosainternational.com');
         } else {
           alert('An error occurred. Please try again later or contact us directly: satis@terrarosainternational.com');
         }
+      } finally {
+        if (submitBtn) submitBtn.disabled = false;
       }
     });
   });

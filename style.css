@@ -376,6 +376,18 @@ body.theme-light .tr-form-card .tr-contact-info {
   margin-top: 0.5rem;
 }
 
+.tr-form-status {
+  margin-top: 0.75rem;
+  font-size: 0.95rem;
+  min-height: 1.2em;
+}
+.tr-form-status.pending { color: #9aa3b5; }
+.tr-form-status.success { color: #3adb7a; }
+.tr-form-status.error { color: #ff7b72; }
+body.theme-light .tr-form-status.pending { color: #4b5668; }
+body.theme-light .tr-form-status.success { color: #1f7a3d; }
+body.theme-light .tr-form-status.error { color: #c62828; }
+
 /* ====== FOOTER ====== */
 
 .tr-footer {
