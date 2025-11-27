@@ -9,16 +9,16 @@ function applyTheme(theme) {
     btn.textContent = theme === 'dark' ? '☀︎' : '☾';
     const isDark = theme === 'dark';
     const lang = document.documentElement.lang;
-    
+
     if (lang === 'tr') {
-        btn.setAttribute('aria-label', isDark ? 'Açık temaya geç' : 'Koyu temaya geç');
+      btn.setAttribute('aria-label', isDark ? 'Açık temaya geç' : 'Koyu temaya geç');
     } else {
-        btn.setAttribute('aria-label', isDark ? 'Switch to light theme' : 'Switch to dark theme');
+      btn.setAttribute('aria-label', isDark ? 'Switch to light theme' : 'Switch to dark theme');
     }
   }
   try {
     localStorage.setItem('terraTheme', theme);
-  } catch (e) {}
+  } catch (e) { }
 }
 
 function initTheme() {
@@ -30,7 +30,7 @@ function initTheme() {
     } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
       theme = 'light';
     }
-  } catch (e) {}
+  } catch (e) { }
   applyTheme(theme);
 }
 
@@ -59,7 +59,7 @@ function isCorporateEmail(email) {
 
 function initForms() {
   const forms = document.querySelectorAll('form.tr-form');
-  
+
   forms.forEach(function (form) {
     const lang = document.documentElement.lang === 'tr' ? 'TR' : 'EN';
 
@@ -125,76 +125,120 @@ function initForms() {
 
 // ==== AI CHAT ====
 function initChat() {
-    const form = document.getElementById("tr-chat-form");
-    const input = document.getElementById("tr-chat-input");
-    const statusEl = document.getElementById("tr-chat-status");
-    const replyEl = document.getElementById("tr-chat-reply");
-    const lang = document.documentElement.lang === 'tr' ? 'TR' : 'EN';
+  const form = document.getElementById("tr-chat-form");
+  const input = document.getElementById("tr-chat-input");
+  const statusEl = document.getElementById("tr-chat-status");
+  const replyEl = document.getElementById("tr-chat-reply");
+  const lang = document.documentElement.lang === 'tr' ? 'TR' : 'EN';
 
-    // Bu array sadece bu browser sekmesinde yaşıyor
-    const history = [];
+  // Bu array sadece bu browser sekmesinde yaşıyor
+  const history = [];
 
-    if (!form || !input || !statusEl || !replyEl) return;
+  if (!form || !input || !statusEl || !replyEl) return;
 
-    form.addEventListener("submit", async function (e) {
-      e.preventDefault();
-      const text = (input.value || "").trim();
-      if (!text) return;
+  form.addEventListener("submit", async function (e) {
+    e.preventDefault();
+    const text = (input.value || "").trim();
+    if (!text) return;
 
-      // Kullanıcının mesajını önce history'ye ekle
-      history.push({ role: "user", content: text });
+    // Kullanıcının mesajını önce history'ye ekle
+    history.push({ role: "user", content: text });
 
-      statusEl.textContent = lang === 'TR' ? "AI düşünüyor..." : "AI is thinking...";
-      replyEl.textContent = "";
-      input.disabled = true;
+    statusEl.textContent = lang === 'TR' ? "AI düşünüyor..." : "AI is thinking...";
+    replyEl.textContent = "";
+    input.disabled = true;
 
-      try {
-        const resp = await fetch("/api/chat", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ history }),
-        });
+    try {
+      const resp = await fetch("/api/chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ history }),
+      });
 
-        const data = await resp.json();
-        if (data.error) {
-          statusEl.textContent = (lang === 'TR' ? "Hata: " : "Error: ") + data.error;
-        } else {
-          const replyText = data.reply || (lang === 'TR' ? "(Yanıt alınamadı)" : "(No response)");
-          statusEl.textContent = "";
-          replyEl.textContent = replyText;
-
-          // Asistan cevabını da history'ye ekle
-          history.push({ role: "assistant", content: replyText });
+      const data = await resp.json();
+      if (data.error) {
+        statusEl.textContent = (lang === 'TR' ? "Hata: " : "Error: ") + data.error;
+      } else {
+        // JSON parse
+        let parsed;
+        try {
+          parsed = JSON.parse(data.reply);
+        } catch (e) {
+          // Fallback if not JSON
+          parsed = { reply: data.reply, fields: {} };
         }
-      } catch (err) {
-        console.error(err);
-        statusEl.textContent = lang === 'TR' ? "Bağlantı hatası. Lütfen daha sonra tekrar deneyin." : "Connection error. Please try again later.";
-      } finally {
-        input.disabled = false;
-        input.value = "";
-        input.focus();
+
+        const replyText = parsed.reply || (lang === 'TR' ? "(Yanıt alınamadı)" : "(No response)");
+        statusEl.textContent = "";
+        replyEl.textContent = replyText;
+
+        // Asistan cevabını da history'ye ekle
+        history.push({ role: "assistant", content: replyText });
+
+        // AUTOFILL FORM
+        if (parsed.fields) {
+          const f = parsed.fields;
+          const fieldsToUpdate = [
+            { key: 'product', selector: '[name="product"]' },
+            { key: 'volume', selector: '[name="volume"]' },
+            { key: 'port', selector: '[name="port"]' },
+            { key: 'bank', selector: '[name="bank"]' },
+            { key: 'company', selector: '[name="company"]' },
+            { key: 'country', selector: '[name="country"]' },
+            { key: 'email', selector: '[name="email"]' },
+            { key: 'message', selector: '[name="message"]' }
+          ];
+
+          let anyUpdated = false;
+
+          fieldsToUpdate.forEach(item => {
+            if (f[item.key]) {
+              const el = document.querySelector(item.selector);
+              if (el) {
+                el.value = f[item.key];
+                // Highlight effect
+                el.style.transition = "background-color 0.5s, border-color 0.5s";
+                el.style.backgroundColor = "#e6f7ff"; // Light blue highlight
+                el.style.borderColor = "#1890ff";
+                setTimeout(() => {
+                  el.style.backgroundColor = "";
+                  el.style.borderColor = "";
+                }, 2000);
+                anyUpdated = true;
+              }
+            }
+          });
+        }
       }
-    });
+    } catch (err) {
+      console.error(err);
+      statusEl.textContent = lang === 'TR' ? "Bağlantı hatası. Lütfen daha sonra tekrar deneyin." : "Connection error. Please try again later.";
+    } finally {
+      input.disabled = false;
+      input.value = "";
+      input.focus();
+    }
+  });
 }
 
 // ==== INITIALIZATION ====
 document.addEventListener('DOMContentLoaded', function () {
-    initTheme();
-    initForms();
-    initChat();
+  initTheme();
+  initForms();
+  initChat();
 
-    const themeBtn = document.getElementById('theme-toggle');
-    if (themeBtn) {
-      themeBtn.addEventListener('click', function () {
-        const isDark = document.body.classList.contains('theme-dark') ||
-                       !document.body.classList.contains('theme-light');
-        applyTheme(isDark ? 'light' : 'dark');
-      });
-    }
-    
-    // Set year
-    const yearEl = document.getElementById("year");
-    if (yearEl) {
-        yearEl.textContent = new Date().getFullYear();
-    }
+  const themeBtn = document.getElementById('theme-toggle');
+  if (themeBtn) {
+    themeBtn.addEventListener('click', function () {
+      const isDark = document.body.classList.contains('theme-dark') ||
+        !document.body.classList.contains('theme-light');
+      applyTheme(isDark ? 'light' : 'dark');
+    });
+  }
+
+  // Set year
+  const yearEl = document.getElementById("year");
+  if (yearEl) {
+    yearEl.textContent = new Date().getFullYear();
+  }
 });
