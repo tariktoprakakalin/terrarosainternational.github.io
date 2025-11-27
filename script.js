@@ -108,13 +108,18 @@ function initForms() {
       });
 
       try {
-        await fetch(GOOGLE_SCRIPT_URL, {
+        const resp = await fetch(GOOGLE_SCRIPT_URL, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
           },
           body: payload.toString()
         });
+
+        if (!resp.ok) {
+          const bodyText = await resp.text().catch(() => '');
+          throw new Error('HTTP ' + resp.status + ' ' + resp.statusText + ' ' + bodyText);
+        }
 
         form.reset();
         setStatus(lang === 'TR' ? 'Talebiniz alındı.' : 'Your inquiry has been received.', 'success');
