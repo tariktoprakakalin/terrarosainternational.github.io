@@ -6,7 +6,7 @@ function applyTheme(theme) {
   document.body.classList.add('theme-' + theme);
   const btn = document.getElementById('theme-toggle');
   if (btn) {
-    btn.textContent = theme === 'dark' ? '☀︎' : '☾';
+    btn.textContent = theme === 'dark' ? '☀' : '🌙';
     const isDark = theme === 'dark';
     const lang = document.documentElement.lang;
 
@@ -131,7 +131,6 @@ function initChat() {
   const replyEl = document.getElementById("tr-chat-reply");
   const lang = document.documentElement.lang === 'tr' ? 'TR' : 'EN';
 
-  // Bu array sadece bu browser sekmesinde yaşıyor
   const history = [];
 
   if (!form || !input || !statusEl || !replyEl) return;
@@ -152,7 +151,6 @@ function initChat() {
     const text = (input.value || "").trim();
     if (!text) return;
 
-    // Kullanıcının mesajını önce history'ye ekle
     history.push({ role: "user", content: text });
 
     statusEl.textContent = lang === 'TR' ? "AI düşünüyor..." : "AI is thinking...";
@@ -170,12 +168,10 @@ function initChat() {
       if (data.error) {
         statusEl.textContent = (lang === 'TR' ? "Hata: " : "Error: ") + data.error;
       } else {
-        // JSON parse
         let parsed;
         try {
           parsed = JSON.parse(data.reply);
         } catch (e) {
-          // Fallback if not JSON
           parsed = { reply: data.reply, fields: {} };
         }
 
@@ -183,10 +179,8 @@ function initChat() {
         statusEl.textContent = "";
         replyEl.textContent = replyText;
 
-        // Asistan cevabını da history'ye ekle
         history.push({ role: "assistant", content: replyText });
 
-        // AUTOFILL FORM
         if (parsed.fields) {
           const f = parsed.fields;
           const fieldsToUpdate = [
@@ -200,22 +194,18 @@ function initChat() {
             { key: 'message', selector: '[name="message"]' }
           ];
 
-          let anyUpdated = false;
-
           fieldsToUpdate.forEach(item => {
             if (f[item.key]) {
               const el = document.querySelector(item.selector);
               if (el) {
                 el.value = f[item.key];
-                // Highlight effect
                 el.style.transition = "background-color 0.5s, border-color 0.5s";
-                el.style.backgroundColor = "#e6f7ff"; // Light blue highlight
+                el.style.backgroundColor = "#e6f7ff";
                 el.style.borderColor = "#1890ff";
                 setTimeout(() => {
                   el.style.backgroundColor = "";
                   el.style.borderColor = "";
                 }, 2000);
-                anyUpdated = true;
               }
             }
           });
@@ -232,11 +222,53 @@ function initChat() {
   }
 }
 
+// ==== CHAT MOBILE TOGGLE ====
+function initChatToggle() {
+  const wrapper = document.querySelector('.tr-chat-wrapper');
+  const toggleBtn = document.getElementById('tr-chat-toggle');
+  if (!wrapper || !toggleBtn) return;
+
+  const lang = document.documentElement.lang === 'tr' ? 'TR' : 'EN';
+  const labels = lang === 'TR'
+    ? { open: 'Asistanı aç', close: 'Asistanı gizle' }
+    : { open: 'Open assistant', close: 'Hide assistant' };
+
+  function setCollapsed(collapsed) {
+    const shouldCollapse = collapsed && window.matchMedia('(max-width: 900px)').matches;
+    if (shouldCollapse) {
+      wrapper.classList.add('mobile-collapsed');
+    } else {
+      wrapper.classList.remove('mobile-collapsed');
+    }
+
+    const isCollapsed = wrapper.classList.contains('mobile-collapsed');
+    toggleBtn.setAttribute('aria-expanded', (!isCollapsed).toString());
+    toggleBtn.textContent = isCollapsed ? labels.open : labels.close;
+  }
+
+  function handleResize() {
+    if (window.matchMedia('(max-width: 900px)').matches) {
+      setCollapsed(true);
+    } else {
+      setCollapsed(false);
+    }
+  }
+
+  toggleBtn.addEventListener('click', function () {
+    const isCollapsed = wrapper.classList.contains('mobile-collapsed');
+    setCollapsed(!isCollapsed);
+  });
+
+  window.addEventListener('resize', handleResize);
+  handleResize();
+}
+
 // ==== INITIALIZATION ====
 document.addEventListener('DOMContentLoaded', function () {
   initTheme();
   initForms();
   initChat();
+  initChatToggle();
 
   const themeBtn = document.getElementById('theme-toggle');
   if (themeBtn) {
@@ -247,7 +279,6 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
-  // Set year
   const yearEl = document.getElementById("year");
   if (yearEl) {
     yearEl.textContent = new Date().getFullYear();
