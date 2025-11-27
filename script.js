@@ -138,6 +138,17 @@ function initChat() {
 
   form.addEventListener("submit", async function (e) {
     e.preventDefault();
+    await handleChatSubmit();
+  });
+
+  input.addEventListener("keydown", function (e) {
+    if (e.key === "Enter" && !e.shiftKey) {
+      e.preventDefault();
+      handleChatSubmit();
+    }
+  });
+
+  async function handleChatSubmit() {
     const text = (input.value || "").trim();
     if (!text) return;
 
@@ -218,7 +229,7 @@ function initChat() {
       input.value = "";
       input.focus();
     }
-  });
+  }
 }
 
 // ==== INITIALIZATION ====

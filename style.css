@@ -318,6 +318,114 @@ body:not(.theme-light) .tr-theme-toggle {
   font-size: 0.9rem;
 }
 
+/* ====== AI CHAT STYLING (Golden Ratio) ====== */
+
+.tr-chat-container {
+  /* Golden Ratio Card */
+  background: linear-gradient(145deg, #1a1a1a, #222);
+  border: 1px solid #333;
+  border-radius: 12px; /* Smooth corners */
+  padding: 1.618rem; /* Golden ratio padding */
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.tr-chat-container:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.3);
+}
+
+.tr-chat-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.tr-chat-input textarea {
+  width: 100%;
+  min-height: 100px; /* Base height */
+  padding: 1rem;
+  border-radius: 8px;
+  border: 1px solid #444;
+  background: #111;
+  color: #fff;
+  font-family: inherit;
+  font-size: 1rem;
+  line-height: 1.618; /* Golden ratio line height */
+  resize: vertical;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.tr-chat-input textarea:focus {
+  outline: none;
+  border-color: #5fb3ff;
+  box-shadow: 0 0 0 3px rgba(95, 179, 255, 0.1);
+}
+
+.tr-chat-btn {
+  align-self: flex-end;
+  padding: 0.618rem 1.618rem; /* Golden ratio padding */
+  background: #fff;
+  color: #000;
+  border: none;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-size: 0.9rem;
+}
+
+.tr-chat-btn:hover {
+  background: #e6e6e6;
+  transform: translateY(-1px);
+}
+
+.tr-chat-status {
+  font-size: 0.85rem;
+  color: #888;
+  margin-top: 0.618rem;
+  font-style: italic;
+}
+
+.tr-chat-reply {
+  margin-top: 1.618rem;
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.05);
+  border-left: 3px solid #5fb3ff;
+  border-radius: 0 8px 8px 0;
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+/* Light Theme Overrides for Chat */
+body.theme-light .tr-chat-container {
+  background: linear-gradient(145deg, #ffffff, #f5f5f5);
+  border: 1px solid #e0e0e0;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
+}
+
+body.theme-light .tr-chat-input textarea {
+  background: #fff;
+  color: #333;
+  border: 1px solid #ccc;
+}
+
+body.theme-light .tr-chat-btn {
+  background: #111;
+  color: #fff;
+}
+
+body.theme-light .tr-chat-btn:hover {
+  background: #333;
+}
+
+body.theme-light .tr-chat-reply {
+  background: rgba(0, 0, 0, 0.03);
+  border-left-color: #333;
+}
+
 /* ====== MOBILE ====== */
 
 @media (max-width: 600px) {
