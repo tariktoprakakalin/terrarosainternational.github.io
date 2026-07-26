@@ -505,6 +505,78 @@ body.theme-light .tr-chat-reply {
   border-left-color: #333;
 }
 
+/* ====== COMPARISON TABLE ====== */
+
+.tr-compare-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 2rem;
+  font-size: 0.97rem;
+}
+
+.tr-compare-table th,
+.tr-compare-table td {
+  padding: 0.85rem 1.1rem;
+  text-align: center;
+  border-bottom: 1px solid #2e2e2e;
+}
+
+.tr-compare-table th {
+  font-weight: 700;
+  font-size: 0.9rem;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
+.tr-compare-table td:first-child,
+.tr-compare-table th:first-child {
+  text-align: left;
+  font-weight: 600;
+}
+
+.tr-compare-table thead tr {
+  background: #1b1b1b;
+}
+
+.tr-compare-table .tr-col-us {
+  color: #5fb3ff;
+}
+
+.tr-compare-table .tr-col-us-head {
+  color: #5fb3ff;
+  background: #12213a;
+}
+
+.tr-compare-table tbody tr:hover {
+  background: rgba(255,255,255,0.03);
+}
+
+.tr-compare-icon-yes { color: #3adb7a; font-size: 1.1rem; }
+.tr-compare-icon-no  { color: #ff7b72; font-size: 1.1rem; }
+.tr-compare-icon-partial { color: #f5a623; font-size: 1.1rem; }
+
+/* Light theme overrides */
+body.theme-light .tr-compare-table th,
+body.theme-light .tr-compare-table td {
+  border-bottom: 1px solid #e0e0e0;
+}
+body.theme-light .tr-compare-table thead tr {
+  background: #f4f4f4;
+}
+body.theme-light .tr-compare-table .tr-col-us-head {
+  background: #e6f2ff;
+  color: #1a5faa;
+}
+body.theme-light .tr-compare-table .tr-col-us {
+  color: #1a5faa;
+}
+body.theme-light .tr-compare-table tbody tr:hover {
+  background: rgba(0,0,0,0.02);
+}
+body.theme-light .tr-compare-icon-yes { color: #1f7a3d; }
+body.theme-light .tr-compare-icon-no  { color: #c62828; }
+body.theme-light .tr-compare-icon-partial { color: #b36b00; }
+
 /* ====== MOBILE ====== */
 
 @media (max-width: 900px) {
