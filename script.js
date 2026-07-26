@@ -283,12 +283,65 @@ function initChatToggle() {
   handleResize();
 }
 
+// ==== SCROLL PROGRESS BAR ====
+function initScrollProgress() {
+  const bar = document.createElement('div');
+  bar.className = 'tr-scroll-progress';
+  document.body.prepend(bar);
+
+  window.addEventListener('scroll', function () {
+    const scrollTop = window.scrollY;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const pct = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+    bar.style.width = pct + '%';
+  }, { passive: true });
+}
+
+// ==== BACK TO TOP ====
+function initBackToTop() {
+  const btn = document.createElement('button');
+  btn.className = 'tr-back-top';
+  btn.setAttribute('aria-label', document.documentElement.lang === 'tr' ? 'Başa dön' : 'Back to top');
+  btn.innerHTML = '↑';
+  document.body.appendChild(btn);
+
+  window.addEventListener('scroll', function () {
+    btn.classList.toggle('visible', window.scrollY > 320);
+  }, { passive: true });
+
+  btn.addEventListener('click', function () {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+}
+
+// ==== ACTIVE NAV HIGHLIGHT ====
+function initActiveNav() {
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.tr-menu a[href^="#"]');
+  if (!sections.length || !navLinks.length) return;
+
+  const observer = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (entry.isIntersecting) {
+        navLinks.forEach(function (link) {
+          link.classList.toggle('active', link.getAttribute('href') === '#' + entry.target.id);
+        });
+      }
+    });
+  }, { rootMargin: '-40% 0px -50% 0px' });
+
+  sections.forEach(function (s) { observer.observe(s); });
+}
+
 // ==== INITIALIZATION ====
 document.addEventListener('DOMContentLoaded', function () {
   initTheme();
   initForms();
   initChat();
   initChatToggle();
+  initScrollProgress();
+  initBackToTop();
+  initActiveNav();
 
   const themeBtn = document.getElementById('theme-toggle');
   if (themeBtn) {

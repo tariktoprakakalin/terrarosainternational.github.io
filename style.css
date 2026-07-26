@@ -505,6 +505,78 @@ body.theme-light .tr-chat-reply {
   border-left-color: #333;
 }
 
+/* ====== SCROLL PROGRESS BAR ====== */
+
+.tr-scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  width: 0%;
+  background: #5fb3ff;
+  z-index: 9999;
+  transition: width 0.08s linear;
+}
+body.theme-light .tr-scroll-progress {
+  background: #1a5faa;
+}
+
+/* ====== BACK TO TOP ====== */
+
+.tr-back-top {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: #5fb3ff;
+  color: #000;
+  border: none;
+  font-size: 1.1rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 0.25s ease, transform 0.25s ease;
+  z-index: 9998;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.35);
+}
+.tr-back-top.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.tr-back-top:hover {
+  background: #85caff;
+}
+body.theme-light .tr-back-top {
+  background: #1a5faa;
+  color: #fff;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.15);
+}
+body.theme-light .tr-back-top:hover {
+  background: #1248883;
+}
+
+/* ====== ACTIVE NAV LINK ====== */
+
+.tr-menu a.active {
+  color: #5fb3ff;
+  font-weight: 700;
+}
+body.theme-light .tr-menu a.active {
+  color: #1a5faa;
+}
+
+/* ====== SMOOTH SCROLL ====== */
+
+html {
+  scroll-behavior: smooth;
+}
+
 /* ====== COMPARISON TABLE ====== */
 
 .tr-compare-table {
