@@ -397,7 +397,61 @@ body.theme-light .tr-form-status.error { color: #c62828; }
   font-size: 0.9rem;
 }
 
-/* ====== AI CHAT STYLING (Golden Ratio) ====== */
+.tr-footer-sep {
+  opacity: 0.4;
+}
+
+.tr-footer-link {
+  opacity: 0.7;
+  text-decoration: none;
+  transition: opacity 0.2s;
+}
+
+.tr-footer-link:hover {
+  opacity: 1;
+  text-decoration: underline;
+}
+
+/* ====== PRIVACY PAGE ====== */
+
+.tr-privacy h1 {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+.tr-privacy h2 {
+  font-size: 1.15rem;
+  margin-top: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+.tr-privacy p,
+.tr-privacy ul,
+.tr-privacy li {
+  line-height: 1.75;
+  max-width: 720px;
+}
+
+.tr-privacy ul {
+  padding-left: 1.4rem;
+}
+
+.tr-privacy li {
+  margin-bottom: 0.35rem;
+}
+
+.tr-privacy code {
+  font-size: 0.85em;
+  padding: 0.1em 0.35em;
+  border-radius: 3px;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+body.theme-light .tr-privacy code {
+  background: rgba(0, 0, 0, 0.06);
+}
+
+
 
 .tr-chat-container {
   /* Golden Ratio Card */

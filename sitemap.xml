@@ -8,4 +8,12 @@
     <loc>https://www.terrarosainternational.com/en.html</loc>
     <priority>0.9</priority>
   </url>
+  <url>
+    <loc>https://www.terrarosainternational.com/privacy.html</loc>
+    <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://www.terrarosainternational.com/gizlilik.html</loc>
+    <priority>0.3</priority>
+  </url>
 </urlset>
