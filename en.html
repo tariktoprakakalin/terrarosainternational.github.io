@@ -283,6 +283,28 @@ Commodity Sourcing & Trade Network | Energy, Agriculture & Industrial Products
 
         <div class="tr-form-layout" id="contact">
 
+          <div class="tr-chat-wrapper">
+            <div class="tr-chat-header">
+              <div>
+                <h3>AI Assistant</h3>
+                <p class="tr-chat-sub">Describe your product and needs — we'll fill the form together.</p>
+              </div>
+              <button id="tr-chat-toggle" class="tr-chat-toggle" type="button" aria-expanded="true">Hide assistant</button>
+            </div>
+            <div class="tr-chat-panel">
+              <div class="tr-chat-container">
+                <form class="tr-chat-form" id="tr-chat-form">
+                  <div class="tr-chat-input">
+                    <textarea id="tr-chat-input" placeholder="Describe your product, quantity or question..." rows="3"></textarea>
+                  </div>
+                  <button type="submit" class="tr-chat-btn">Send</button>
+                </form>
+                <div class="tr-chat-status" id="tr-chat-status"></div>
+                <div class="tr-chat-reply" id="tr-chat-reply"></div>
+              </div>
+            </div>
+          </div>
+
           <div class="tr-form-card">
             <form class="tr-form" id="tr-inquiry-form">
               <div class="tr-field">

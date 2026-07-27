@@ -282,6 +282,28 @@ Emtia Ticareti ve Tedarik Hizmetleri | Enerji, Tarım ve Endüstriyel Hammaddele
 
         <div class="tr-form-layout" id="contact">
 
+          <div class="tr-chat-wrapper">
+            <div class="tr-chat-header">
+              <div>
+                <h3>AI Asistan</h3>
+                <p class="tr-chat-sub">Ürününüzü ve ihtiyacınızı anlatın — formu birlikte dolduralım.</p>
+              </div>
+              <button id="tr-chat-toggle" class="tr-chat-toggle" type="button" aria-expanded="true">Asistanı gizle</button>
+            </div>
+            <div class="tr-chat-panel">
+              <div class="tr-chat-container">
+                <form class="tr-chat-form" id="tr-chat-form">
+                  <div class="tr-chat-input">
+                    <textarea id="tr-chat-input" placeholder="Ürününüzü, miktarınızı veya sorunuzu yazın..." rows="3"></textarea>
+                  </div>
+                  <button type="submit" class="tr-chat-btn">Gönder</button>
+                </form>
+                <div class="tr-chat-status" id="tr-chat-status"></div>
+                <div class="tr-chat-reply" id="tr-chat-reply"></div>
+              </div>
+            </div>
+          </div>
+
           <div class="tr-form-card">
             <form class="tr-form" id="tr-inquiry-form">
               <div class="tr-field">
