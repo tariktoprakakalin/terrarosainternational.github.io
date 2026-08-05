@@ -797,10 +797,13 @@ article.tr-privacy h2 {
 
 article.tr-privacy p,
 article.tr-privacy ul,
-article.tr-privacy ol,
-article.tr-privacy li {
+article.tr-privacy ol {
   line-height: 1.75;
   max-width: 720px;
+}
+
+article.tr-privacy li {
+  line-height: 1.75;
 }
 
 article.tr-privacy ul,
