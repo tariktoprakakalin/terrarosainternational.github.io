@@ -3,6 +3,7 @@
 body {
   margin: 0;
   font-family: system-ui, -apple-system, sans-serif;
+  font-size: 1rem;
   line-height: 1.6;
   background: #0d0d0d;   /* default: dark */
   color: #e6e6e6;
@@ -71,7 +72,7 @@ body.theme-light .tr-form textarea {
 body.theme-light .tr-footer {
   background: #fafafa;
   border-top: 1px solid #eeeeee;
-  color: #777777;
+  color: #595959;
 }
 
 /* KOYU TEMA */
@@ -132,7 +133,7 @@ body.theme-dark .tr-footer,
 body:not(.theme-light) .tr-footer {
   background: #0d0d0d;
   border-top: 1px solid #222222;
-  color: #777777;
+  color: #9e9e9e;
 }
 
 /* ====== HEADER & LOGO ====== */
@@ -766,3 +767,81 @@ body.theme-light .tr-compare-icon-partial { color: #b36b00; }
   }
 }
 
+/* ====== READING MODE COMPATIBILITY ====== */
+
+/*
+ * Ensures semantic article content is well-structured for browser reader modes
+ * (Safari Reader View, Firefox Reader Mode, Edge Immersive Reader).
+ * Decorative/layout elements are kept outside <article> in the HTML;
+ * these rules reinforce legibility inside article content.
+ */
+
+article.tr-privacy {
+  max-width: 720px;
+  font-size: 1rem;
+  line-height: 1.75;
+}
+
+article.tr-privacy h1 {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+  line-height: 1.2;
+}
+
+article.tr-privacy h2 {
+  font-size: 1.15rem;
+  margin-top: 2rem;
+  margin-bottom: 0.5rem;
+  line-height: 1.3;
+}
+
+article.tr-privacy p,
+article.tr-privacy ul,
+article.tr-privacy ol,
+article.tr-privacy li {
+  line-height: 1.75;
+  max-width: 720px;
+}
+
+article.tr-privacy ul,
+article.tr-privacy ol {
+  padding-left: 1.4rem;
+}
+
+article.tr-privacy li {
+  margin-bottom: 0.35rem;
+}
+
+article.tr-privacy code {
+  font-size: 0.85em;
+  padding: 0.1em 0.35em;
+  border-radius: 3px;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+body.theme-light article.tr-privacy code {
+  background: rgba(0, 0, 0, 0.06);
+}
+
+/* Ensure .tr-card grids inside articles remain readable in flow */
+article.tr-privacy .tr-grid-3 {
+  display: block;
+}
+
+article.tr-privacy .tr-card {
+  margin-bottom: 1.5rem;
+  padding: 0;
+  background: none;
+  border: none;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 0;
+}
+
+body.theme-light article.tr-privacy .tr-card {
+  border-bottom: 1px solid #e8e8e8;
+}
+
+article.tr-privacy .tr-card:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+}
