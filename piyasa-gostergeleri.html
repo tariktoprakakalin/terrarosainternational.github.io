@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Piyasa Göstergeleri | TerraRosa International</title>
+  <meta name="description" content="Tarım ve enerji piyasaları için kamuya açık kaynaklardan sağlanan gösterge niteliğindeki veriler.">
+  <meta name="robots" content="index, follow">
+  <link rel="alternate" href="https://terrarosainternational.com/piyasa-gostergeleri.html" hreflang="tr" />
+  <link rel="alternate" href="https://terrarosainternational.com/market-indicators.html" hreflang="en" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="tr-header">
+    <div class="tr-container tr-nav">
+      <div class="tr-logo">
+        <a href="index.html"><img src="logo.png" alt="TerraRosa International" /></a>
+      </div>
+      <nav class="tr-menu">
+        <a href="index.html">Ana Sayfa</a>
+        <a href="#energy">Enerji</a>
+        <a href="#agriculture">Tarım</a>
+        <a href="#sources">Kaynaklar</a>
+        <a href="market-indicators.html" class="tr-lang">EN</a>
+        <button id="theme-toggle" class="tr-theme-toggle" type="button">☀</button>
+      </nav>
+    </div>
+    <section class="tr-hero">
+      <div class="tr-container tr-hero-inner">
+        <div class="tr-hero-text">
+          <h1>Piyasa Göstergeleri</h1>
+          <p>Tarım ve enerji piyasaları için kamuya açık, kaynakları açıkça belirtilmiş gösterge verileri.</p>
+        </div>
+      </div>
+    </section>
+  </header>
+
+  <main>
+    <section class="tr-section">
+      <div class="tr-container">
+        <p class="tr-lead">
+          Bu sayfadaki veriler bilgi amaçlı piyasa göstergeleridir; teklif, piyasa kotasyonu veya işlem fiyatı değildir.
+          Güncel fiyatlar, işlem koşulları ve doğrulama için ilgili kaynaklara başvurulmalıdır.
+        </p>
+      </div>
+    </section>
+
+    <section id="energy" class="tr-section tr-section-alt">
+      <div class="tr-container">
+        <h2>Enerji göstergeleri</h2>
+        <div class="tr-grid-3">
+          <article class="tr-card">
+            <h3>Brent ham petrol</h3>
+            <p>Aylık ortalama fiyat serisi.</p>
+            <p><strong>Planlanan kaynak:</strong> Dünya Bankası Pink Sheet / EIA</p>
+          </article>
+          <article class="tr-card">
+            <h3>WTI ham petrol</h3>
+            <p>Aylık ortalama fiyat serisi.</p>
+            <p><strong>Planlanan kaynak:</strong> Dünya Bankası Pink Sheet / EIA</p>
+          </article>
+          <article class="tr-card">
+            <h3>Doğal gaz</h3>
+            <p>Kamuya açık aylık gösterge serisi.</p>
+            <p><strong>Planlanan kaynak:</strong> Dünya Bankası Pink Sheet / EIA</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="agriculture" class="tr-section">
+      <div class="tr-container">
+        <h2>Tarım göstergeleri</h2>
+        <div class="tr-grid-3">
+          <article class="tr-card">
+            <h3>Mısır</h3>
+            <p>Aylık uluslararası gösterge serisi.</p>
+            <p><strong>Planlanan kaynak:</strong> Dünya Bankası Pink Sheet / USDA</p>
+          </article>
+          <article class="tr-card">
+            <h3>Buğday</h3>
+            <p>Aylık uluslararası gösterge serisi.</p>
+            <p><strong>Planlanan kaynak:</strong> Dünya Bankası Pink Sheet / USDA</p>
+          </article>
+          <article class="tr-card">
+            <h3>FAO Gıda Fiyat Endeksi</h3>
+            <p>Küresel gıda emtiaları için endeks göstergesi.</p>
+            <p><strong>Planlanan kaynak:</strong> FAO</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="sources" class="tr-section tr-section-alt">
+      <div class="tr-container">
+        <h2>Veri kaynakları ve yöntem</h2>
+        <p class="tr-lead">
+          İlk sürüm; Dünya Bankası Pink Sheet, U.S. Energy Information Administration (EIA),
+          U.S. Department of Agriculture (USDA) ve FAO'nun kamuya açık serilerini kullanmak üzere tasarlanmıştır.
+        </p>
+        <div class="tr-grid-3">
+          <article class="tr-card">
+            <h3>Güncelleme sıklığı</h3>
+            <p>Seriler kaynağın yayın sıklığına göre, çoğunlukla aylık olarak güncellenecektir.</p>
+          </article>
+          <article class="tr-card">
+            <h3>Veri kapsamı</h3>
+            <p>Birim, para birimi, tarih ve kaynak bilgisi her grafikle birlikte gösterilecektir.</p>
+          </article>
+          <article class="tr-card">
+            <h3>Kullanım sınırı</h3>
+            <p>Bu göstergeler yatırım, alım-satım veya hukuki tavsiye niteliğinde değildir.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="tr-footer">
+    <div class="tr-container">
+      <span>© <span id="year"></span> TerraRosa International. All rights reserved.</span>
+    </div>
+  </footer>
+  <script src="script.js"></script>
+</body>
+</html>
