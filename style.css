@@ -397,6 +397,40 @@ body.theme-light .tr-form-status.error { color: #c62828; }
   font-size: 0.9rem;
 }
 
+.tr-footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.75rem 1rem;
+  margin-top: 0.75rem;
+}
+
+.tr-faq {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.tr-faq details {
+  padding: 1rem 1.25rem;
+  border: 1px solid #2e2e2e;
+  border-radius: 8px;
+  background: #1b1b1b;
+}
+
+.tr-faq summary {
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.tr-faq p {
+  margin: 0.75rem 0 0;
+}
+
+body.theme-light .tr-faq details {
+  background: #ffffff;
+  border-color: #e0e0e0;
+}
+
 /* ====== AI CHAT STYLING (Golden Ratio) ====== */
 
 .tr-chat-container {
@@ -543,4 +577,3 @@ body.theme-light .tr-chat-reply {
     flex-direction: column;
   }
 }
-

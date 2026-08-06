@@ -68,13 +68,7 @@ function initForms() {
     form.addEventListener('submit', async function (e) {
       e.preventDefault();
 
-      const company = form.querySelector('[name="company"]')?.value.trim();
-      const country = form.querySelector('[name="country"]')?.value.trim();
       const email = form.querySelector('[name="email"]')?.value.trim();
-      const product = form.querySelector('[name="product"]')?.value.trim();
-      const volume = form.querySelector('[name="volume"]')?.value.trim();
-      const port = form.querySelector('[name="port"]')?.value.trim();
-      const bank = form.querySelector('[name="bank"]')?.value.trim();
       const message = form.querySelector('[name="message"]')?.value.trim();
 
       function setStatus(text, type) {
@@ -97,13 +91,7 @@ function initForms() {
 
       const payload = new URLSearchParams({
         language: lang,
-        company: company || '',
-        country: country || '',
         email: email || '',
-        product: product || '',
-        volume: volume || '',
-        port: port || '',
-        bank: bank || '',
         message: message || ''
       });
 
@@ -304,4 +292,3 @@ document.addEventListener('DOMContentLoaded', function () {
     yearEl.textContent = new Date().getFullYear();
   }
 });
-
