@@ -406,6 +406,17 @@ body.theme-light .tr-form-status.error { color: #c62828; }
   margin-top: 0.75rem;
 }
 
+.tr-footer-links .tr-social-link {
+  display: inline-flex;
+  align-items: center;
+}
+
+.tr-footer-links .tr-social-link svg {
+  width: 16px;
+  height: 16px;
+  display: block;
+}
+
 .tr-faq {
   display: grid;
   gap: 0.75rem;
