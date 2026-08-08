@@ -411,9 +411,21 @@ body.theme-light .tr-form-status.error { color: #c62828; }
   align-items: center;
 }
 
-.tr-footer-links .tr-social-link svg {
-  width: 16px;
-  height: 16px;
+.tr-footer-social {
+  display: flex;
+  justify-content: center;
+  margin-top: 0.75rem;
+}
+
+.tr-footer-social .tr-social-link {
+  display: inline-flex;
+  align-items: center;
+}
+
+.tr-footer-links .tr-social-link svg,
+.tr-footer-social .tr-social-link svg {
+  width: 20px;
+  height: 20px;
   display: block;
 }
 
