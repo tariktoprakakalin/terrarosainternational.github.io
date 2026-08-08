@@ -158,7 +158,7 @@ body:not(.theme-light) .tr-footer {
 }
 
 .tr-logo img {
-  width: 220px;
+  width: 660px;
   max-width: 100%;
   height: auto;
   display: block;
@@ -559,7 +559,7 @@ body.theme-light .tr-chat-reply {
 
 @media (max-width: 600px) {
   .tr-logo img {
-    width: 180px;
+    width: 540px;
   }
 
   .tr-grid-3 {
